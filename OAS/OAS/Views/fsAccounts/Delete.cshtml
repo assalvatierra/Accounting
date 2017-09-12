@@ -1,0 +1,64 @@
+﻿@model OAS.Models.fsAccount
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>fsAccount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AccntNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccntNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccntTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccntTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncreaseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncreaseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fsAccntCategory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fsAccntCategory.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAS", "OAS\OAS.csproj", "{8FCFF60C-285C-45B3-B5E8-A241F07E68D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAS.Tests", "OAS.Tests\OAS.Tests.csproj", "{6A8954F5-8E8E-41F4-B0E2-A0E24D06156D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FCFF60C-285C-45B3-B5E8-A241F07E68D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FCFF60C-285C-45B3-B5E8-A241F07E68D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FCFF60C-285C-45B3-B5E8-A241F07E68D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FCFF60C-285C-45B3-B5E8-A241F07E68D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A8954F5-8E8E-41F4-B0E2-A0E24D06156D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A8954F5-8E8E-41F4-B0E2-A0E24D06156D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A8954F5-8E8E-41F4-B0E2-A0E24D06156D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A8954F5-8E8E-41F4-B0E2-A0E24D06156D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ec757afa56c4726a5d96b2877140d2c" Name="Diagram1" >
+        <EntityTypeShape EntityType="OasDB.fsAccount" Width="1.5" PointX="3.375" PointY="0.5" />
+        <EntityTypeShape EntityType="OasDB.fsAccntCategory" Width="1.5" PointX="0.75" PointY="0.5" />
+        <AssociationConnector Association="OasDB.fsAccntCategoryfsAccount" />
+        <EntityTypeShape EntityType="OasDB.fsTrxHdr" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="OasDB.fsTrxDetail" Width="1.5" PointX="3.375" PointY="3.875" />
+        <AssociationConnector Association="OasDB.fsAccountfsTrxDetail" />
+        <AssociationConnector Association="OasDB.fsTrxHdrfsTrxDetail" />
+        <EntityTypeShape EntityType="OasDB.fsSubAccnt" Width="1.5" PointX="5.75" PointY="0.5" />
+        <AssociationConnector Association="OasDB.fsAccountfsSubAccnt" />
+        <AssociationConnector Association="OasDB.fsSubAccntfsTrxDetail" />
+        <EntityTypeShape EntityType="OasDB.fsAccntSetting" Width="1.5" PointX="7.875" PointY="3" />
+        <EntityTypeShape EntityType="OasDB.fsConfigCode" Width="1.5" PointX="7.875" PointY="0.625" />
+        <AssociationConnector Association="OasDB.fsConfigCodefsAccntSetting" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OasDB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="OasDBStoreContainer">
+    <EntitySet Name="fsAccounts" EntityType="OasDB.Store.fsAccounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsAccntCategories" EntityType="OasDB.Store.fsAccntCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsTrxHdrs" EntityType="OasDB.Store.fsTrxHdrs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsTrxDetails" EntityType="OasDB.Store.fsTrxDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsSubAccnts" EntityType="OasDB.Store.fsSubAccnts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsAccntSettings" EntityType="OasDB.Store.fsAccntSettings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsConfigCodes" EntityType="OasDB.Store.fsConfigCodes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="fsAccntCategoryfsAccount" Association="OasDB.Store.fsAccntCategoryfsAccount">
+      <End Role="fsAccntCategory" EntitySet="fsAccntCategories" />
+      <End Role="fsAccount" EntitySet="fsAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="fsAccountfsTrxDetail" Association="OasDB.Store.fsAccountfsTrxDetail">
+      <End Role="fsAccount" EntitySet="fsAccounts" />
+      <End Role="fsTrxDetail" EntitySet="fsTrxDetails" />
+    </AssociationSet>
+    <AssociationSet Name="fsTrxHdrfsTrxDetail" Association="OasDB.Store.fsTrxHdrfsTrxDetail">
+      <End Role="fsTrxHdr" EntitySet="fsTrxHdrs" />
+      <End Role="fsTrxDetail" EntitySet="fsTrxDetails" />
+    </AssociationSet>
+    <AssociationSet Name="fsAccountfsSubAccnt" Association="OasDB.Store.fsAccountfsSubAccnt">
+      <End Role="fsAccount" EntitySet="fsAccounts" />
+      <End Role="fsSubAccnt" EntitySet="fsSubAccnts" />
+    </AssociationSet>
+    <AssociationSet Name="fsSubAccntfsTrxDetail" Association="OasDB.Store.fsSubAccntfsTrxDetail">
+      <End Role="fsSubAccnt" EntitySet="fsSubAccnts" />
+      <End Role="fsTrxDetail" EntitySet="fsTrxDetails" />
+    </AssociationSet>
+    <AssociationSet Name="fsConfigCodefsAccntSetting" Association="OasDB.Store.fsConfigCodefsAccntSetting">
+      <End Role="fsConfigCode" EntitySet="fsConfigCodes" />
+      <End Role="fsAccntSetting" EntitySet="fsAccntSettings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="fsAccounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccntNo" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="AccntTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="180" />
+    <Property Name="IncreaseCode" Type="nvarchar" Nullable="false" MaxLength="2" />
+    <Property Name="fsAccntCategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fsAccntCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fsTrxHdrs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DtTrx" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="5" />
+    <Property Name="trxRemarks" Type="nvarchar" Nullable="true" MaxLength="80" />
+    <Property Name="dtEntry" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EnteredBy" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="dtEdit" Type="datetime" Nullable="true" />
+    <Property Name="EditedBy" Type="nvarchar" Nullable="true" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="fsTrxDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fsTrxHdrId" Type="int" Nullable="false" />
+    <Property Name="fsAccountId" Type="int" Nullable="false" />
+    <Property Name="fsSubAccntId" Type="int" Nullable="true" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="Debit" Type="decimal" Nullable="false" />
+    <Property Name="Credit" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fsSubAccnts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fsAccountId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="Remarks" Type="nvarchar" Nullable="true" MaxLength="180" />
+  </EntityType>
+  <EntityType Name="fsAccntSettings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fsConfigCodeId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="fsConfigCodes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <Association Name="fsAccntCategoryfsAccount">
+    <End Role="fsAccntCategory" Type="OasDB.Store.fsAccntCategories" Multiplicity="1" />
+    <End Role="fsAccount" Type="OasDB.Store.fsAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsAccntCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsAccount">
+        <PropertyRef Name="fsAccntCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsAccountfsTrxDetail">
+    <End Role="fsAccount" Type="OasDB.Store.fsAccounts" Multiplicity="1" />
+    <End Role="fsTrxDetail" Type="OasDB.Store.fsTrxDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsTrxDetail">
+        <PropertyRef Name="fsAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsTrxHdrfsTrxDetail">
+    <End Role="fsTrxHdr" Type="OasDB.Store.fsTrxHdrs" Multiplicity="1" />
+    <End Role="fsTrxDetail" Type="OasDB.Store.fsTrxDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsTrxHdr">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsTrxDetail">
+        <PropertyRef Name="fsTrxHdrId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsAccountfsSubAccnt">
+    <End Role="fsAccount" Type="OasDB.Store.fsAccounts" Multiplicity="1" />
+    <End Role="fsSubAccnt" Type="OasDB.Store.fsSubAccnts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsSubAccnt">
+        <PropertyRef Name="fsAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsSubAccntfsTrxDetail">
+    <End Role="fsSubAccnt" Type="OasDB.Store.fsSubAccnts" Multiplicity="0..1" />
+    <End Role="fsTrxDetail" Type="OasDB.Store.fsTrxDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsSubAccnt">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsTrxDetail">
+        <PropertyRef Name="fsSubAccntId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsConfigCodefsAccntSetting">
+    <End Role="fsConfigCode" Type="OasDB.Store.fsConfigCodes" Multiplicity="1" />
+    <End Role="fsAccntSetting" Type="OasDB.Store.fsAccntSettings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsConfigCode">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsAccntSetting">
+        <PropertyRef Name="fsConfigCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="OasDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="OasDBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="fsAccounts" EntityType="OasDB.fsAccount" />
+          <EntitySet Name="fsAccntCategories" EntityType="OasDB.fsAccntCategory" />
+          <AssociationSet Name="fsAccntCategoryfsAccount" Association="OasDB.fsAccntCategoryfsAccount">
+            <End Role="fsAccntCategory" EntitySet="fsAccntCategories" />
+            <End Role="fsAccount" EntitySet="fsAccounts" />
+          </AssociationSet>
+          <EntitySet Name="fsTrxHdrs" EntityType="OasDB.fsTrxHdr" />
+          <EntitySet Name="fsTrxDetails" EntityType="OasDB.fsTrxDetail" />
+          <AssociationSet Name="fsAccountfsTrxDetail" Association="OasDB.fsAccountfsTrxDetail">
+            <End Role="fsAccount" EntitySet="fsAccounts" />
+            <End Role="fsTrxDetail" EntitySet="fsTrxDetails" />
+          </AssociationSet>
+          <AssociationSet Name="fsTrxHdrfsTrxDetail" Association="OasDB.fsTrxHdrfsTrxDetail">
+            <End Role="fsTrxHdr" EntitySet="fsTrxHdrs" />
+            <End Role="fsTrxDetail" EntitySet="fsTrxDetails" />
+          </AssociationSet>
+          <EntitySet Name="fsSubAccnts" EntityType="OasDB.fsSubAccnt" />
+          <AssociationSet Name="fsAccountfsSubAccnt" Association="OasDB.fsAccountfsSubAccnt">
+            <End Role="fsAccount" EntitySet="fsAccounts" />
+            <End Role="fsSubAccnt" EntitySet="fsSubAccnts" />
+          </AssociationSet>
+          <AssociationSet Name="fsSubAccntfsTrxDetail" Association="OasDB.fsSubAccntfsTrxDetail">
+            <End Role="fsSubAccnt" EntitySet="fsSubAccnts" />
+            <End Role="fsTrxDetail" EntitySet="fsTrxDetails" />
+          </AssociationSet>
+          <EntitySet Name="fsAccntSettings" EntityType="OasDB.fsAccntSetting" />
+          <EntitySet Name="fsConfigCodes" EntityType="OasDB.fsConfigCode" />
+          <AssociationSet Name="fsConfigCodefsAccntSetting" Association="OasDB.fsConfigCodefsAccntSetting">
+            <End Role="fsConfigCode" EntitySet="fsConfigCodes" />
+            <End Role="fsAccntSetting" EntitySet="fsAccntSettings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="fsAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccntNo" Type="String" Nullable="false" MaxLength="10" />
+          <Property Name="AccntTitle" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="180" />
+          <NavigationProperty Name="fsAccntCategory" Relationship="OasDB.fsAccntCategoryfsAccount" FromRole="fsAccount" ToRole="fsAccntCategory" />
+          <Property Name="IncreaseCode" Type="String" Nullable="false" MaxLength="2" />
+          <Property Name="fsAccntCategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="fsTrxDetails" Relationship="OasDB.fsAccountfsTrxDetail" FromRole="fsAccount" ToRole="fsTrxDetail" />
+          <NavigationProperty Name="fsSubAccnts" Relationship="OasDB.fsAccountfsSubAccnt" FromRole="fsAccount" ToRole="fsSubAccnt" />
+        </EntityType>
+        <EntityType Name="fsAccntCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="fsAccounts" Relationship="OasDB.fsAccntCategoryfsAccount" FromRole="fsAccntCategory" ToRole="fsAccount" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="fsAccntCategoryfsAccount">
+          <End Type="OasDB.fsAccntCategory" Role="fsAccntCategory" Multiplicity="1" />
+          <End Type="OasDB.fsAccount" Role="fsAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fsAccntCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="fsAccount">
+              <PropertyRef Name="fsAccntCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="fsTrxHdr">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DtTrx" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="5" />
+          <Property Name="trxRemarks" Type="String" Nullable="true" MaxLength="80" />
+          <NavigationProperty Name="fsTrxDetails" Relationship="OasDB.fsTrxHdrfsTrxDetail" FromRole="fsTrxHdr" ToRole="fsTrxDetail" />
+          <Property Name="dtEntry" Type="String" Nullable="false" />
+          <Property Name="EnteredBy" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="dtEdit" Type="DateTime" Nullable="true" />
+          <Property Name="EditedBy" Type="String" Nullable="true" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="fsTrxDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="fsAccount" Relationship="OasDB.fsAccountfsTrxDetail" FromRole="fsTrxDetail" ToRole="fsAccount" />
+          <Property Name="fsTrxHdrId" Type="Int32" Nullable="false" />
+          <Property Name="fsAccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="fsTrxHdr" Relationship="OasDB.fsTrxHdrfsTrxDetail" FromRole="fsTrxDetail" ToRole="fsTrxHdr" />
+          <Property Name="fsSubAccntId" Type="Int32" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="Debit" Type="Decimal" Nullable="false" />
+          <Property Name="Credit" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="fsSubAccnt" Relationship="OasDB.fsSubAccntfsTrxDetail" FromRole="fsTrxDetail" ToRole="fsSubAccnt" />
+        </EntityType>
+        <Association Name="fsAccountfsTrxDetail">
+          <End Type="OasDB.fsAccount" Role="fsAccount" Multiplicity="1" />
+          <End Type="OasDB.fsTrxDetail" Role="fsTrxDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fsAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="fsTrxDetail">
+              <PropertyRef Name="fsAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fsTrxHdrfsTrxDetail">
+          <End Type="OasDB.fsTrxHdr" Role="fsTrxHdr" Multiplicity="1" />
+          <End Type="OasDB.fsTrxDetail" Role="fsTrxDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fsTrxHdr">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="fsTrxDetail">
+              <PropertyRef Name="fsTrxHdrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="fsSubAccnt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="fsAccount" Relationship="OasDB.fsAccountfsSubAccnt" FromRole="fsSubAccnt" ToRole="fsAccount" />
+          <Property Name="fsAccountId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="Remarks" Type="String" Nullable="true" MaxLength="180" />
+          <NavigationProperty Name="fsTrxDetails" Relationship="OasDB.fsSubAccntfsTrxDetail" FromRole="fsSubAccnt" ToRole="fsTrxDetail" />
+        </EntityType>
+        <Association Name="fsAccountfsSubAccnt">
+          <End Type="OasDB.fsAccount" Role="fsAccount" Multiplicity="1" />
+          <End Type="OasDB.fsSubAccnt" Role="fsSubAccnt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fsAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="fsSubAccnt">
+              <PropertyRef Name="fsAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fsSubAccntfsTrxDetail">
+          <End Type="OasDB.fsSubAccnt" Role="fsSubAccnt" Multiplicity="0..1" />
+          <End Type="OasDB.fsTrxDetail" Role="fsTrxDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fsSubAccnt">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="fsTrxDetail">
+              <PropertyRef Name="fsSubAccntId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="fsAccntSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fsConfigCodeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="fsConfigCode" Relationship="OasDB.fsConfigCodefsAccntSetting" FromRole="fsAccntSetting" ToRole="fsConfigCode" />
+        </EntityType>
+        <EntityType Name="fsConfigCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" />
+          <NavigationProperty Name="fsAccntSettings" Relationship="OasDB.fsConfigCodefsAccntSetting" FromRole="fsConfigCode" ToRole="fsAccntSetting" />
+        </EntityType>
+        <Association Name="fsConfigCodefsAccntSetting">
+          <End Type="OasDB.fsConfigCode" Role="fsConfigCode" Multiplicity="1" />
+          <End Type="OasDB.fsAccntSetting" Role="fsAccntSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fsConfigCode">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="fsAccntSetting">
+              <PropertyRef Name="fsConfigCodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OasDBStoreContainer" CdmEntityContainer="OasDBContainer">
+    <EntitySetMapping Name="fsAccounts">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsAccount)">
+        <MappingFragment StoreEntitySet="fsAccounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccntNo" ColumnName="AccntNo" />
+          <ScalarProperty Name="AccntTitle" ColumnName="AccntTitle" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IncreaseCode" ColumnName="IncreaseCode" />
+          <ScalarProperty Name="fsAccntCategoryId" ColumnName="fsAccntCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsAccntCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsAccntCategory)">
+        <MappingFragment StoreEntitySet="fsAccntCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsTrxHdrs">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsTrxHdr)">
+        <MappingFragment StoreEntitySet="fsTrxHdrs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DtTrx" ColumnName="DtTrx" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="trxRemarks" ColumnName="trxRemarks" />
+          <ScalarProperty Name="dtEntry" ColumnName="dtEntry" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="dtEdit" ColumnName="dtEdit" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsTrxDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsTrxDetail)">
+        <MappingFragment StoreEntitySet="fsTrxDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsTrxHdrId" ColumnName="fsTrxHdrId" />
+          <ScalarProperty Name="fsAccountId" ColumnName="fsAccountId" />
+          <ScalarProperty Name="fsSubAccntId" ColumnName="fsSubAccntId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Debit" ColumnName="Debit" />
+          <ScalarProperty Name="Credit" ColumnName="Credit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsSubAccnts">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsSubAccnt)">
+        <MappingFragment StoreEntitySet="fsSubAccnts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsAccountId" ColumnName="fsAccountId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsAccntSettings">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsAccntSetting)">
+        <MappingFragment StoreEntitySet="fsAccntSettings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsConfigCodeId" ColumnName="fsConfigCodeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsConfigCodes">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsConfigCode)">
+        <MappingFragment StoreEntitySet="fsConfigCodes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
