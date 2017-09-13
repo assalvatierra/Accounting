@@ -13,6 +13,7 @@
     <EntitySet Name="fsSubAccnts" EntityType="OasDB.Store.fsSubAccnts" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="fsAccntSettings" EntityType="OasDB.Store.fsAccntSettings" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="fsConfigCodes" EntityType="OasDB.Store.fsConfigCodes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsTrxStatus" EntityType="OasDB.Store.fsTrxStatus" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="fsAccntCategoryfsAccount" Association="OasDB.Store.fsAccntCategoryfsAccount">
       <End Role="fsAccntCategory" EntitySet="fsAccntCategories" />
       <End Role="fsAccount" EntitySet="fsAccounts" />
@@ -37,6 +38,10 @@
       <End Role="fsConfigCode" EntitySet="fsConfigCodes" />
       <End Role="fsAccntSetting" EntitySet="fsAccntSettings" />
     </AssociationSet>
+    <AssociationSet Name="fsTrxStatusfsTrxHdr" Association="OasDB.Store.fsTrxStatusfsTrxHdr">
+      <End Role="fsTrxStatus" EntitySet="fsTrxStatus" />
+      <End Role="fsTrxHdr" EntitySet="fsTrxHdrs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="fsAccounts">
     <Key>
@@ -44,8 +49,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="AccntNo" Type="nvarchar" Nullable="false" MaxLength="10" />
-    <Property Name="AccntTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="180" />
+    <Property Name="AccntTitle" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="250" />
     <Property Name="IncreaseCode" Type="nvarchar" Nullable="false" MaxLength="2" />
     <Property Name="fsAccntCategoryId" Type="int" Nullable="false" />
   </EntityType>
@@ -63,12 +68,12 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DtTrx" Type="datetime" Nullable="false" />
-    <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="5" />
     <Property Name="trxRemarks" Type="nvarchar" Nullable="true" MaxLength="80" />
-    <Property Name="dtEntry" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dtEntry" Type="datetime" Nullable="false" />
     <Property Name="EnteredBy" Type="nvarchar" Nullable="false" MaxLength="80" />
     <Property Name="dtEdit" Type="datetime" Nullable="true" />
     <Property Name="EditedBy" Type="nvarchar" Nullable="true" MaxLength="80" />
+    <Property Name="fsTrxStatusId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="fsTrxDetails">
     <Key>
@@ -78,7 +83,7 @@
     <Property Name="fsTrxHdrId" Type="int" Nullable="false" />
     <Property Name="fsAccountId" Type="int" Nullable="false" />
     <Property Name="fsSubAccntId" Type="int" Nullable="true" />
-    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="150" />
     <Property Name="Debit" Type="decimal" Nullable="false" />
     <Property Name="Credit" Type="decimal" Nullable="false" />
   </EntityType>
@@ -106,6 +111,13 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="fsTrxStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="10" />
   </EntityType>
   <Association Name="fsAccntCategoryfsAccount">
     <End Role="fsAccntCategory" Type="OasDB.Store.fsAccntCategories" Multiplicity="1" />
@@ -179,6 +191,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fsTrxStatusfsTrxHdr">
+    <End Role="fsTrxStatus" Type="OasDB.Store.fsTrxStatus" Multiplicity="1" />
+    <End Role="fsTrxHdr" Type="OasDB.Store.fsTrxHdrs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsTrxStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsTrxHdr">
+        <PropertyRef Name="fsTrxStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -215,6 +239,11 @@
             <End Role="fsConfigCode" EntitySet="fsConfigCodes" />
             <End Role="fsAccntSetting" EntitySet="fsAccntSettings" />
           </AssociationSet>
+          <EntitySet Name="fsTrxStatus" EntityType="OasDB.fsTrxStatus" />
+          <AssociationSet Name="fsTrxStatusfsTrxHdr" Association="OasDB.fsTrxStatusfsTrxHdr">
+            <End Role="fsTrxStatus" EntitySet="fsTrxStatus" />
+            <End Role="fsTrxHdr" EntitySet="fsTrxHdrs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="fsAccount">
           <Key>
@@ -222,8 +251,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccntNo" Type="String" Nullable="false" MaxLength="10" />
-          <Property Name="AccntTitle" Type="String" Nullable="false" MaxLength="50" />
-          <Property Name="Description" Type="String" Nullable="true" MaxLength="180" />
+          <Property Name="AccntTitle" Type="String" Nullable="false" MaxLength="150" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="250" />
           <NavigationProperty Name="fsAccntCategory" Relationship="OasDB.fsAccntCategoryfsAccount" FromRole="fsAccount" ToRole="fsAccntCategory" />
           <Property Name="IncreaseCode" Type="String" Nullable="false" MaxLength="2" />
           <Property Name="fsAccntCategoryId" Type="Int32" Nullable="false" />
@@ -257,13 +286,14 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DtTrx" Type="DateTime" Nullable="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="5" />
           <Property Name="trxRemarks" Type="String" Nullable="true" MaxLength="80" />
           <NavigationProperty Name="fsTrxDetails" Relationship="OasDB.fsTrxHdrfsTrxDetail" FromRole="fsTrxHdr" ToRole="fsTrxDetail" />
-          <Property Name="dtEntry" Type="String" Nullable="false" />
+          <Property Name="dtEntry" Type="DateTime" Nullable="false" />
           <Property Name="EnteredBy" Type="String" Nullable="false" MaxLength="80" />
           <Property Name="dtEdit" Type="DateTime" Nullable="true" />
           <Property Name="EditedBy" Type="String" Nullable="true" MaxLength="80" />
+          <NavigationProperty Name="fsTrxStatus" Relationship="OasDB.fsTrxStatusfsTrxHdr" FromRole="fsTrxHdr" ToRole="fsTrxStatus" />
+          <Property Name="fsTrxStatusId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="fsTrxDetail">
           <Key>
@@ -275,7 +305,7 @@
           <Property Name="fsAccountId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="fsTrxHdr" Relationship="OasDB.fsTrxHdrfsTrxDetail" FromRole="fsTrxDetail" ToRole="fsTrxHdr" />
           <Property Name="fsSubAccntId" Type="Int32" Nullable="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="150" />
           <Property Name="Debit" Type="Decimal" Nullable="false" />
           <Property Name="Credit" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="fsSubAccnt" Relationship="OasDB.fsSubAccntfsTrxDetail" FromRole="fsTrxDetail" ToRole="fsSubAccnt" />
@@ -369,6 +399,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="fsTrxStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="10" />
+          <NavigationProperty Name="fsTrxHdrs" Relationship="OasDB.fsTrxStatusfsTrxHdr" FromRole="fsTrxStatus" ToRole="fsTrxHdr" />
+        </EntityType>
+        <Association Name="fsTrxStatusfsTrxHdr">
+          <End Type="OasDB.fsTrxStatus" Role="fsTrxStatus" Multiplicity="1" />
+          <End Type="OasDB.fsTrxHdr" Role="fsTrxHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fsTrxStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="fsTrxHdr">
+              <PropertyRef Name="fsTrxStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -401,12 +451,12 @@
         <MappingFragment StoreEntitySet="fsTrxHdrs">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DtTrx" ColumnName="DtTrx" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="trxRemarks" ColumnName="trxRemarks" />
           <ScalarProperty Name="dtEntry" ColumnName="dtEntry" />
           <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
           <ScalarProperty Name="dtEdit" ColumnName="dtEdit" />
           <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="fsTrxStatusId" ColumnName="fsTrxStatusId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -448,6 +498,14 @@
         <MappingFragment StoreEntitySet="fsConfigCodes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsTrxStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsTrxStatus)">
+        <MappingFragment StoreEntitySet="fsTrxStatus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

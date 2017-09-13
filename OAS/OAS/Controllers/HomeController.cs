@@ -13,6 +13,22 @@ namespace OAS.Controllers
             return View();
         }
 
+        public ActionResult TransactionList()
+        {
+            return RedirectToAction("index", "fsTrxHdrs");
+        }
+
+        public ActionResult AccountsList()
+        {
+            return RedirectToAction("Index", "fsAccounts");
+        }
+
+        public ActionResult SubAccountsList()
+        {
+            return RedirectToAction("index", "fsSubAccnts");
+        }
+
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -32,6 +32,11 @@
       <End Role="fsConfigCode" EntitySet="fsConfigCodes" />
       <End Role="fsAccntSetting" EntitySet="fsAccntSettings" />
     </AssociationSet>
+    <EntitySet Name="fsTrxStatus" EntityType="OasDB.fsTrxStatus" />
+    <AssociationSet Name="fsTrxStatusfsTrxHdr" Association="OasDB.fsTrxStatusfsTrxHdr">
+      <End Role="fsTrxStatus" EntitySet="fsTrxStatus" />
+      <End Role="fsTrxHdr" EntitySet="fsTrxHdrs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="fsAccount">
     <Key>
@@ -39,8 +44,8 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="AccntNo" Type="String" Nullable="false" MaxLength="10" />
-    <Property Name="AccntTitle" Type="String" Nullable="false" MaxLength="50" />
-    <Property Name="Description" Type="String" Nullable="true" MaxLength="180" />
+    <Property Name="AccntTitle" Type="String" Nullable="false" MaxLength="150" />
+    <Property Name="Description" Type="String" Nullable="true" MaxLength="250" />
     <NavigationProperty Name="fsAccntCategory" Relationship="OasDB.fsAccntCategoryfsAccount" FromRole="fsAccount" ToRole="fsAccntCategory" />
     <Property Name="IncreaseCode" Type="String" Nullable="false" MaxLength="2" />
     <Property Name="fsAccntCategoryId" Type="Int32" Nullable="false" />
@@ -74,13 +79,14 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DtTrx" Type="DateTime" Nullable="false" />
-    <Property Name="Status" Type="String" Nullable="false" MaxLength="5" />
     <Property Name="trxRemarks" Type="String" Nullable="true" MaxLength="80" />
     <NavigationProperty Name="fsTrxDetails" Relationship="OasDB.fsTrxHdrfsTrxDetail" FromRole="fsTrxHdr" ToRole="fsTrxDetail" />
-    <Property Name="dtEntry" Type="String" Nullable="false" />
+    <Property Name="dtEntry" Type="DateTime" Nullable="false" />
     <Property Name="EnteredBy" Type="String" Nullable="false" MaxLength="80" />
     <Property Name="dtEdit" Type="DateTime" Nullable="true" />
     <Property Name="EditedBy" Type="String" Nullable="true" MaxLength="80" />
+    <NavigationProperty Name="fsTrxStatus" Relationship="OasDB.fsTrxStatusfsTrxHdr" FromRole="fsTrxHdr" ToRole="fsTrxStatus" />
+    <Property Name="fsTrxStatusId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="fsTrxDetail">
     <Key>
@@ -92,7 +98,7 @@
     <Property Name="fsAccountId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="fsTrxHdr" Relationship="OasDB.fsTrxHdrfsTrxDetail" FromRole="fsTrxDetail" ToRole="fsTrxHdr" />
     <Property Name="fsSubAccntId" Type="Int32" Nullable="true" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="80" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="150" />
     <Property Name="Debit" Type="Decimal" Nullable="false" />
     <Property Name="Credit" Type="Decimal" Nullable="false" />
     <NavigationProperty Name="fsSubAccnt" Relationship="OasDB.fsSubAccntfsTrxDetail" FromRole="fsTrxDetail" ToRole="fsSubAccnt" />
@@ -183,6 +189,26 @@
       </Principal>
       <Dependent Role="fsAccntSetting">
         <PropertyRef Name="fsConfigCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="fsTrxStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="10" />
+    <NavigationProperty Name="fsTrxHdrs" Relationship="OasDB.fsTrxStatusfsTrxHdr" FromRole="fsTrxStatus" ToRole="fsTrxHdr" />
+  </EntityType>
+  <Association Name="fsTrxStatusfsTrxHdr">
+    <End Type="OasDB.fsTrxStatus" Role="fsTrxStatus" Multiplicity="1" />
+    <End Type="OasDB.fsTrxHdr" Role="fsTrxHdr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsTrxStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsTrxHdr">
+        <PropertyRef Name="fsTrxStatusId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

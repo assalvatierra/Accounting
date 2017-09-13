@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="OasDB.fsAccount" Width="1.5" PointX="3.375" PointY="0.5" />
         <EntityTypeShape EntityType="OasDB.fsAccntCategory" Width="1.5" PointX="0.75" PointY="0.5" />
         <AssociationConnector Association="OasDB.fsAccntCategoryfsAccount" />
-        <EntityTypeShape EntityType="OasDB.fsTrxHdr" Width="1.5" PointX="0.75" PointY="3.875" />
-        <EntityTypeShape EntityType="OasDB.fsTrxDetail" Width="1.5" PointX="3.375" PointY="3.875" />
+        <EntityTypeShape EntityType="OasDB.fsTrxHdr" Width="1.5" PointX="1.125" PointY="5.375" />
+        <EntityTypeShape EntityType="OasDB.fsTrxDetail" Width="1.5" PointX="3.5" PointY="5.375" />
         <AssociationConnector Association="OasDB.fsAccountfsTrxDetail" />
         <AssociationConnector Association="OasDB.fsTrxHdrfsTrxDetail" />
         <EntityTypeShape EntityType="OasDB.fsSubAccnt" Width="1.5" PointX="5.75" PointY="0.5" />
@@ -18,6 +18,8 @@
         <EntityTypeShape EntityType="OasDB.fsAccntSetting" Width="1.5" PointX="7.875" PointY="3" />
         <EntityTypeShape EntityType="OasDB.fsConfigCode" Width="1.5" PointX="7.875" PointY="0.625" />
         <AssociationConnector Association="OasDB.fsConfigCodefsAccntSetting" />
+        <EntityTypeShape EntityType="OasDB.fsTrxStatus" Width="1.5" PointX="1.125" PointY="2.875" />
+        <AssociationConnector Association="OasDB.fsTrxStatusfsTrxHdr" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

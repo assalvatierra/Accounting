@@ -22,14 +22,15 @@ namespace OAS.Models
     
         public int Id { get; set; }
         public System.DateTime DtTrx { get; set; }
-        public string Status { get; set; }
         public string trxRemarks { get; set; }
-        public string dtEntry { get; set; }
+        public System.DateTime dtEntry { get; set; }
         public string EnteredBy { get; set; }
         public Nullable<System.DateTime> dtEdit { get; set; }
         public string EditedBy { get; set; }
+        public int fsTrxStatusId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fsTrxDetail> fsTrxDetails { get; set; }
+        public virtual fsTrxStatus fsTrxStatus { get; set; }
     }
 }

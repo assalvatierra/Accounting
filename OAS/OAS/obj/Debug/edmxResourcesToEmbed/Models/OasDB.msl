@@ -27,12 +27,12 @@
         <MappingFragment StoreEntitySet="fsTrxHdrs">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DtTrx" ColumnName="DtTrx" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="trxRemarks" ColumnName="trxRemarks" />
           <ScalarProperty Name="dtEntry" ColumnName="dtEntry" />
           <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
           <ScalarProperty Name="dtEdit" ColumnName="dtEdit" />
           <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="fsTrxStatusId" ColumnName="fsTrxStatusId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -74,6 +74,14 @@
         <MappingFragment StoreEntitySet="fsConfigCodes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsTrxStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsTrxStatus)">
+        <MappingFragment StoreEntitySet="fsTrxStatus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

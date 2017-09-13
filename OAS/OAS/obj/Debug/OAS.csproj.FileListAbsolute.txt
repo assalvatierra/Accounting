@@ -77,6 +77,5 @@ D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.OAuth.xm
 D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.Google.xml
 D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.csprojResolveAssemblyReference.cache
 D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.dll
 D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.pdb

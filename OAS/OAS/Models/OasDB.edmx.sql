@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/12/2017 15:40:35
+-- Date Created: 09/13/2017 15:46:36
 -- Generated from EDMX file: D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\Models\OasDB.edmx
 -- --------------------------------------------------
 
@@ -35,6 +35,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_fsConfigCodefsAccntSetting]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[fsAccntSettings] DROP CONSTRAINT [FK_fsConfigCodefsAccntSetting];
 GO
+IF OBJECT_ID(N'[dbo].[FK_fsTrxStatusfsTrxHdr]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[fsTrxHdrs] DROP CONSTRAINT [FK_fsTrxStatusfsTrxHdr];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -61,6 +64,9 @@ GO
 IF OBJECT_ID(N'[dbo].[fsConfigCodes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[fsConfigCodes];
 GO
+IF OBJECT_ID(N'[dbo].[fsTrxStatus]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[fsTrxStatus];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -70,8 +76,8 @@ GO
 CREATE TABLE [dbo].[fsAccounts] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [AccntNo] nvarchar(10)  NOT NULL,
-    [AccntTitle] nvarchar(50)  NOT NULL,
-    [Description] nvarchar(180)  NULL,
+    [AccntTitle] nvarchar(150)  NOT NULL,
+    [Description] nvarchar(250)  NULL,
     [IncreaseCode] nvarchar(2)  NOT NULL,
     [fsAccntCategoryId] int  NOT NULL
 );
@@ -89,12 +95,12 @@ GO
 CREATE TABLE [dbo].[fsTrxHdrs] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DtTrx] datetime  NOT NULL,
-    [Status] nvarchar(5)  NOT NULL,
     [trxRemarks] nvarchar(80)  NULL,
-    [dtEntry] nvarchar(max)  NOT NULL,
+    [dtEntry] datetime  NOT NULL,
     [EnteredBy] nvarchar(80)  NOT NULL,
     [dtEdit] datetime  NULL,
-    [EditedBy] nvarchar(80)  NULL
+    [EditedBy] nvarchar(80)  NULL,
+    [fsTrxStatusId] int  NOT NULL
 );
 GO
 
@@ -104,7 +110,7 @@ CREATE TABLE [dbo].[fsTrxDetails] (
     [fsTrxHdrId] int  NOT NULL,
     [fsAccountId] int  NOT NULL,
     [fsSubAccntId] int  NULL,
-    [Description] nvarchar(80)  NOT NULL,
+    [Description] nvarchar(150)  NOT NULL,
     [Debit] decimal(18,0)  NOT NULL,
     [Credit] decimal(18,0)  NOT NULL
 );
@@ -132,6 +138,13 @@ GO
 CREATE TABLE [dbo].[fsConfigCodes] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Code] nvarchar(10)  NOT NULL
+);
+GO
+
+-- Creating table 'fsTrxStatus'
+CREATE TABLE [dbo].[fsTrxStatus] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Status] nvarchar(10)  NOT NULL
 );
 GO
 
@@ -178,6 +191,12 @@ GO
 -- Creating primary key on [Id] in table 'fsConfigCodes'
 ALTER TABLE [dbo].[fsConfigCodes]
 ADD CONSTRAINT [PK_fsConfigCodes]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'fsTrxStatus'
+ALTER TABLE [dbo].[fsTrxStatus]
+ADD CONSTRAINT [PK_fsTrxStatus]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -273,6 +292,21 @@ GO
 CREATE INDEX [IX_FK_fsConfigCodefsAccntSetting]
 ON [dbo].[fsAccntSettings]
     ([fsConfigCodeId]);
+GO
+
+-- Creating foreign key on [fsTrxStatusId] in table 'fsTrxHdrs'
+ALTER TABLE [dbo].[fsTrxHdrs]
+ADD CONSTRAINT [FK_fsTrxStatusfsTrxHdr]
+    FOREIGN KEY ([fsTrxStatusId])
+    REFERENCES [dbo].[fsTrxStatus]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_fsTrxStatusfsTrxHdr'
+CREATE INDEX [IX_FK_fsTrxStatusfsTrxHdr]
+ON [dbo].[fsTrxHdrs]
+    ([fsTrxStatusId]);
 GO
 
 -- --------------------------------------------------

@@ -199,6 +199,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\fsAccountsController.cs" />
+    <Compile Include="Controllers\fsSubAccntsController.cs" />
+    <Compile Include="Controllers\fsTrxHdrsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -224,6 +226,9 @@
       <DependentUpon>OasDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fsTrxHdr.cs">
+      <DependentUpon>OasDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fsTrxStatus.cs">
       <DependentUpon>OasDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -328,6 +333,16 @@
     <Content Include="Views\fsAccounts\Details.cshtml" />
     <Content Include="Views\fsAccounts\Edit.cshtml" />
     <Content Include="Views\fsAccounts\Index.cshtml" />
+    <Content Include="Views\fsSubAccnts\Create.cshtml" />
+    <Content Include="Views\fsSubAccnts\Delete.cshtml" />
+    <Content Include="Views\fsSubAccnts\Details.cshtml" />
+    <Content Include="Views\fsSubAccnts\Edit.cshtml" />
+    <Content Include="Views\fsSubAccnts\Index.cshtml" />
+    <Content Include="Views\fsTrxHdrs\Create.cshtml" />
+    <Content Include="Views\fsTrxHdrs\Delete.cshtml" />
+    <Content Include="Views\fsTrxHdrs\Details.cshtml" />
+    <Content Include="Views\fsTrxHdrs\Edit.cshtml" />
+    <Content Include="Views\fsTrxHdrs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
