@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Transaction List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,55 +12,53 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DtTrx)
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.trxRemarks)
+            Remarks
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dtEntry)
+            Entered
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EnteredBy)
+            Edited
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dtEdit)
+            Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EditedBy)
+            Action
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fsTrxStatus.Status)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DtTrx)
+            @item.DtTrx.ToString("yyyy-MMM-dd")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.trxRemarks)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.dtEntry)
+            <span style="font-size:smaller;color:gray;">
+                @Html.DisplayFor(modelItem => item.EnteredBy)
+                @@
+                @Html.DisplayFor(modelItem => item.dtEntry)
+            </span>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EnteredBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dtEdit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EditedBy)
+            <span style="font-size:smaller;color:gray;">
+                @Html.DisplayFor(modelItem => item.EditedBy)
+                @@
+                @Html.DisplayFor(modelItem => item.dtEdit)
+            </span>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.fsTrxStatus.Status)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Details", "TrxDetails", "fsTrxDetails", new { hdrid = item.Id }, null) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
