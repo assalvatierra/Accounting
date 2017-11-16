@@ -17,6 +17,9 @@ namespace OAS.Controllers
         // Get: Details by HdrId
         public ActionResult TrxDetails( int? hdrid)
         {
+            if (hdrid == null) hdrid = (int)Session["TRXHDRID"];
+            Session["TRXHDRID"] = hdrid;
+
             var details = db.fsTrxDetails.Where(d => d.fsTrxHdrId == hdrid).ToList();
             var Header = db.fsTrxHdrs.Find(hdrid);
 
@@ -67,7 +70,7 @@ namespace OAS.Controllers
             {
                 db.fsTrxDetails.Add(fsTrxDetail);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("TrxDetails");
             }
 
             ViewBag.fsAccountId = new SelectList(db.fsAccounts, "Id", "AccntNo", fsTrxDetail.fsAccountId);
@@ -105,7 +108,7 @@ namespace OAS.Controllers
             {
                 db.Entry(fsTrxDetail).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("TrxDetails");
             }
             ViewBag.fsAccountId = new SelectList(db.fsAccounts, "Id", "AccntNo", fsTrxDetail.fsAccountId);
             ViewBag.fsTrxHdrId = new SelectList(db.fsTrxHdrs, "Id", "trxRemarks", fsTrxDetail.fsTrxHdrId);
@@ -136,7 +139,7 @@ namespace OAS.Controllers
             fsTrxDetail fsTrxDetail = db.fsTrxDetails.Find(id);
             db.fsTrxDetails.Remove(fsTrxDetail);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("TrxDetails");
         }
 
         protected override void Dispose(bool disposing)
