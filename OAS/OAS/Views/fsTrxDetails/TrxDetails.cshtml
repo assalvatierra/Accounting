@@ -4,10 +4,15 @@
     OAS.Models.fsTrxHdr hdrItem = (OAS.Models.fsTrxHdr)ViewBag.header;
 
     ViewBag.Title = "Journal Entry";
+
+    int iItems = 0;
+    decimal dDebitTotal = 0;
+    decimal dCreditTotal = 0;
 }
 
 <h2>Journal Entry</h2>
 <p>
+    Trx: <span style="color:blue;"> @hdrItem.trxRemarks</span><br />
     SysId: <span style="color:blue;"> @hdrItem.Id</span> &diams; 
     Date: <span style="color:blue;"> @hdrItem.DtTrx.ToString("yyyy-MMM-ss")</span>  &diams;
     Entered by: <span style="color:blue;"> @hdrItem.EnteredBy @hdrItem.dtEntry.ToString("yyyy-MMM-ss")</span> 
@@ -17,10 +22,13 @@
 <table class="table">
     <tr>
         <th>
-            Accnt#
+            #
         </th>
         <th>
-            SubAccnt#
+            Accnt
+        </th>
+        <th>
+            SubAccnt
         </th>
         <th>
             Description
@@ -31,31 +39,36 @@
         <th>
             Credit
         </th>
-        <th>
-            Remarks
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
+    iItems++;
+    dDebitTotal += item.Debit;
+    dCreditTotal += item.Credit;
+    string sDebit = (item.Debit>0 ? item.Debit.ToString("##,###.00") : "" );
+    string sCredit = (item.Credit > 0 ? item.Credit.ToString("##,###.00") : "");
+
     <tr>
         <td>
+            @iItems
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.fsAccount.AccntNo)
+            - <span style="font:300 11px arial verdana;color:blue;">@item.fsAccount.AccntTitle</span>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.fsSubAccntId)
+            - <span style="font:300 11px arial verdana;color:blue;">@item.fsSubAccnt.Name</span>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Debit)
+            <span style="color:blue;">@sDebit</span>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Credit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fsTrxHdr.trxRemarks)
+            <span style="color:blue;">@sCredit</span>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -64,6 +77,12 @@
     </tr>
 }
 
+    <tr>
+        <td style="background-color:lightblue;" colspan="4" align="right"><span style="font-style:italic;">Total >> </span></td>
+        <td style="background-color:lightblue;font:bold 14px arial, verdana;">@dDebitTotal.ToString("##,###.00")</td>
+        <td style="background-color:lightblue;font:bold 14px arial, verdana;">@dCreditTotal.ToString("##,###.00")</td>
+        <td style="background-color:lightblue;" colspan="2">&nbsp;</td>
+    </tr>
 </table>
 
 <p>
