@@ -1,0 +1,96 @@
+﻿@model IEnumerable<OAS.Models.cTrialBalance>
+
+@{
+    ViewBag.Title = "Trial Balance";
+
+    string sAccnt = "";
+    decimal dDebit = 0;
+    decimal dCredit = 0;
+}
+
+<h2>TrialBalance</h2>
+
+<table class="table">
+    
+@foreach (var item in Model) {
+    if (sAccnt != item.AccntNo)
+    {
+        sAccnt = item.AccntNo;
+        dDebit = 0;
+        dCredit = 0;
+
+        <tr>
+            <td>
+                <span style="font:600 12px arial, verdana; color:darkblue;">
+                    @Html.DisplayFor(modelItem => item.AccntNo) -
+                    @Html.DisplayFor(modelItem => item.AccntTitle)
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                @foreach (var TrxDtl in Model)
+                {
+                    if (TrxDtl.AccntNo == item.AccntNo)
+                    {
+                        dDebit += item.Debit;
+                        dCredit += item.Credit;
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrxId)
+                        </td>
+                        <td>
+                            @item.DtTrx.ToString("MMM-dd-yy")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Debit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Credit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubAccntId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubAccntName)
+                        </td>
+                    </tr>
+                        }
+                    }
+
+                    <tr>
+                        <td colspan="3">
+                            <span style="font:600 12px arial, verdana;">
+                                Sub-Total
+                            </span></td>
+                        <td>
+                            <span style="font:600 12px arial, verdana; color:darkblue;">
+                                @dDebit.ToString("##,###.00")
+                            </span>
+                        </td>
+                        <td>
+                            <span style="font:600 12px arial, verdana; color:darkblue;">
+                                @dCredit.ToString("##,###.00")
+                            </span>
+                        </td>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">&nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+    }
+
+
+}
+
+</table>

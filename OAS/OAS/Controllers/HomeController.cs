@@ -28,6 +28,12 @@ namespace OAS.Controllers
             return RedirectToAction("index", "fsSubAccnts");
         }
 
+        public ActionResult TrialBalance()
+        {
+            int iMon = System.DateTime.Today.Month;
+            int iYear = System.DateTime.Today.Year;
+            return RedirectToAction("TrialBalance", "fsReports", new { Mon = iMon, Year = iYear });
+        }
 
         public ActionResult About()
         {

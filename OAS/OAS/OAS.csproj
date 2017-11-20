@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\fsAccountsController.cs" />
+    <Compile Include="Controllers\fsReportsController.cs" />
     <Compile Include="Controllers\fsSubAccntsController.cs" />
     <Compile Include="Controllers\fsTrxDetailsController.cs" />
     <Compile Include="Controllers\fsTrxHdrsController.cs" />
@@ -208,6 +209,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DBClasses.cs" />
     <Compile Include="Models\fsAccntCategory.cs">
       <DependentUpon>OasDB.tt</DependentUpon>
     </Compile>
@@ -271,6 +273,7 @@
       <LastGenOutput>OasDB.cs</LastGenOutput>
       <DependentUpon>OasDB.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\RptTrialBalance.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -350,6 +353,7 @@
     <Content Include="Views\fsTrxDetails\Edit.cshtml" />
     <Content Include="Views\fsTrxDetails\Index.cshtml" />
     <Content Include="Views\fsTrxDetails\TrxDetails.cshtml" />
+    <Content Include="Views\fsReports\TrialBalance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

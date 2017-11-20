@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4ec757afa56c4726a5d96b2877140d2c" Name="Diagram1" >
+      <Diagram DiagramId="4ec757afa56c4726a5d96b2877140d2c" Name="Diagram1" ZoomLevel="86" >
         <EntityTypeShape EntityType="OasDB.fsAccount" Width="1.5" PointX="3.375" PointY="0.5" />
         <EntityTypeShape EntityType="OasDB.fsAccntCategory" Width="1.5" PointX="0.75" PointY="0.5" />
         <AssociationConnector Association="OasDB.fsAccntCategoryfsAccount" />

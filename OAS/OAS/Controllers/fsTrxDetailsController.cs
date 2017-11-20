@@ -31,8 +31,7 @@ namespace OAS.Controllers
         // GET: fsTrxDetails
         public ActionResult Index()
         {
-            var fsTrxDetails = db.fsTrxDetails.Include(f => f.fsAccount).Include(f => f.fsTrxHdr).Include(f => f.fsSubAccnt);
-            return View(fsTrxDetails.ToList());
+            return RedirectToAction("Index", "fsTrxHdrs");
         }
 
         // GET: fsTrxDetails/Details/5
@@ -53,10 +52,19 @@ namespace OAS.Controllers
         // GET: fsTrxDetails/Create
         public ActionResult Create()
         {
+            int hdrid = (int)Session["TRXHDRID"];
+
+            Models.fsTrxDetail dtl = new fsTrxDetail();
+            dtl.fsTrxHdrId = hdrid;
+            dtl.Debit = 0;
+            dtl.Credit = 0;
+            dtl.fsSubAccntId = 0;
+
             ViewBag.fsAccountId = new SelectList(db.fsAccounts, "Id", "AccntNo");
-            ViewBag.fsTrxHdrId = new SelectList(db.fsTrxHdrs, "Id", "trxRemarks");
+            ViewBag.fsTrxHdrId = new SelectList(db.fsTrxHdrs, "Id", "trxRemarks", hdrid);
             ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts, "Id", "Name");
-            return View();
+
+            return View(dtl);
         }
 
         // POST: fsTrxDetails/Create
