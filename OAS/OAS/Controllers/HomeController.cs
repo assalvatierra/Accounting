@@ -35,6 +35,27 @@ namespace OAS.Controllers
             return RedirectToAction("TrialBalance", "fsReports", new { Mon = iMon, Year = iYear });
         }
 
+        public ActionResult BalanceSheet()
+        {
+            int iMon = System.DateTime.Today.Month;
+            int iYear = System.DateTime.Today.Year;
+            return RedirectToAction("BalanceSheet", "fsReports", new { Mon = iMon, Year = iYear });
+        }
+
+        public ActionResult IncomeStatement()
+        {
+            int iMon = System.DateTime.Today.Month;
+            int iYear = System.DateTime.Today.Year;
+            return RedirectToAction("IncomeStatement", "fsReports", new { Mon = iMon, Year = iYear });
+        }
+
+        public ActionResult JournalList()
+        {
+            int iMon = System.DateTime.Today.Month;
+            int iYear = System.DateTime.Today.Year;
+            return RedirectToAction("JournalList", "fsReports", new { Mon = iMon, Year = iYear });
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

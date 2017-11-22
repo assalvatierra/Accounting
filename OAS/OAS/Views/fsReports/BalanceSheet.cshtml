@@ -1,0 +1,178 @@
+﻿@model IEnumerable<OAS.Models.cBalanceSheet>
+
+@{
+    ViewBag.Title = "BalanceSheet";
+
+    decimal dAsset_open = 0;
+    decimal dAsset_current = 0;
+    decimal dAsset_total = 0;
+
+    decimal dLiab_open = 0;
+    decimal dLiab_current = 0;
+    decimal dLiab_total = 0;
+
+    decimal dCap_open = 0;
+    decimal dCap_current = 0;
+    decimal dCap_total = 0;
+
+    string AccntType = "";
+}
+
+<h2>Balance Sheet</h2>
+
+<table class="table">
+
+    <!-- Assets -->
+    <tr>
+        <th colspan="5">
+            <span>Assets</span>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.catId == 1)
+        {
+            dAsset_open += item.Openning;
+            dAsset_current += item.CurrentTotal;
+            dAsset_total += item.AccntTotal;
+        }
+        if (item.catId != 1) { continue; }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntDesc)
+            </td>
+            <td>
+                @( item.Openning==0?"": item.Openning.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.CurrentTotal == 0 ? "" : item.CurrentTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.AccntTotal == 0 ? "" : item.AccntTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+        </tr>
+
+    }
+    <tr style="background-color:lightgray;font:500 12px arial, verdana; color:blue;">
+        <th colspan="2" align="right" >
+            <span>Total Assets</span>
+        </th>
+        <td>@dAsset_open.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dAsset_current.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dAsset_total.ToString("##,###.00;(##,###.00)")</td>
+    </tr>
+    <tr><td colspan="5">&nbsp;</td></tr>
+    <!-- end of Assets -->
+
+
+    <!-- Liabilities -->
+    <tr>
+        <th colspan="5">
+            <span>Liabilities</span>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.catId == 2)
+        {
+            dLiab_open += item.Openning;
+            dLiab_current += item.CurrentTotal;
+            dLiab_total += item.AccntTotal;
+        }
+        if (item.catId != 2) { continue; }
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntDesc)
+            </td>
+            <td>
+                @( item.Openning == 0 ? "" : item.Openning.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.CurrentTotal == 0 ? "" : item.CurrentTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.AccntTotal == 0 ? "" : item.AccntTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+        </tr>
+    }
+    <tr style="background-color:lightgray;font:500 12px arial, verdana;">
+        <th colspan="2" align="right">
+            <span>Total Liabilities</span>
+        </th>
+        <td>@dLiab_open.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dLiab_current.ToString("##,###.00;(##,###.00)")</td>
+        <th>@dLiab_total.ToString("##,###.00;(##,###.00)")</th>
+    </tr>
+
+    <!-- end of Liabilities -->
+
+    <!-- Owners Equity -->
+    <tr>
+        <th colspan="5">
+            <span>Owner's Equity</span>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.catId == 3)
+        {
+            dCap_open += item.Openning;
+            dCap_current += item.CurrentTotal;
+            dCap_total += item.AccntTotal;
+        }
+        if (item.catId != 3) { continue; }
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntDesc)
+            </td>
+            <td>
+                @( item.Openning == 0 ? "" : item.Openning.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.CurrentTotal == 0 ? "" : item.CurrentTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.AccntTotal == 0 ? "" : item.AccntTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+        </tr>
+    }
+    <tr style="background-color:lightgray;font:500 12px arial, verdana; ">
+        <th colspan="2" align="right">
+            <span>Total Owners Equity</span>
+        </th>
+        <td>@dCap_open.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dCap_current.ToString("##,###.00;(##,###.00)")</td>
+        <th>@dCap_total.ToString("##,###.00;(##,###.00)")</th>
+    </tr>
+
+    <!-- end of Owners Equity -->
+
+
+    <tr style="background-color:lightgray;font:500 12px arial, verdana; color: blue;">
+        <th colspan="2" align="right">
+            <span>Total Liabilities & Equity</span>
+        </th>
+        @{ 
+            decimal dLiab_cap_open = dLiab_open + dCap_open;
+            decimal dLiab_cap_current = dLiab_current + dCap_current;
+            decimal dLiab_cap_total = dLiab_total + dCap_total;
+        }
+        <td>@dLiab_cap_open.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dLiab_cap_current.ToString("##,###.00;(##,###.00)")</td>
+        <th>@dLiab_cap_total.ToString("##,###.00;(##,###.00)")</th>
+    </tr>
+
+
+
+</table>

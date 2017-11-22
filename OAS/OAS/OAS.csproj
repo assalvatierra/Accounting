@@ -273,6 +273,7 @@
       <LastGenOutput>OasDB.cs</LastGenOutput>
       <DependentUpon>OasDB.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\RptBalanceSheet.sql" />
     <Content Include="Models\RptTrialBalance.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -354,6 +355,9 @@
     <Content Include="Views\fsTrxDetails\Index.cshtml" />
     <Content Include="Views\fsTrxDetails\TrxDetails.cshtml" />
     <Content Include="Views\fsReports\TrialBalance.cshtml" />
+    <Content Include="Views\fsReports\BalanceSheet.cshtml" />
+    <Content Include="Views\fsReports\IncomeStatement.cshtml" />
+    <Content Include="Views\fsReports\JournalList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
