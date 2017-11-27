@@ -55,6 +55,12 @@ namespace OAS.Controllers
             int iYear = System.DateTime.Today.Year;
             return RedirectToAction("JournalList", "fsReports", new { Mon = iMon, Year = iYear });
         }
+        public ActionResult CashFlow()
+        {
+            int iMon = System.DateTime.Today.Month;
+            int iYear = System.DateTime.Today.Year;
+            return RedirectToAction("CashFlow", "fsReports", new { Mon = iMon, Year = iYear });
+        }
 
         public ActionResult About()
         {

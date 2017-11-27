@@ -66,3 +66,9 @@ insert into [dbo].[fsSubAccnts](    [fsAccountId],    [Name],    [Remarks]) valu
 
 insert into [dbo].[fsTrxStatus] ( [Status] ) values
 ('DRAFT'),('SUBMITTED'),('POSTED');
+
+insert into [dbo].[fsRptCats] ([RptCatName]) values
+('CASH'),('Owners Equity');
+
+insert into [dbo].fsRptCatAccnts ([fsRptCatId],[fsAccountId],[Sort]) values
+(1,2,1),(2,18,1),(2,19,2);

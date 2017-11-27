@@ -60,9 +60,9 @@ namespace OAS.Controllers
             dtl.Credit = 0;
             dtl.fsSubAccntId = 0;
 
-            ViewBag.fsAccountId = new SelectList(db.fsAccounts, "Id", "AccntNo");
+            ViewBag.fsAccountId = new SelectList(db.fsAccounts.Select( d => new { Id = d.Id, Text = d.AccntNo + "-" + d.Description + "["+ d.IncreaseCode +"]"}), "Id", "Text");
             ViewBag.fsTrxHdrId = new SelectList(db.fsTrxHdrs, "Id", "trxRemarks", hdrid);
-            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts, "Id", "Name");
+            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts.Select( d => new { Id = d.Id, Text = d.Id + "-" + d.Name }), "Id", "Text");
 
             return View(dtl);
         }

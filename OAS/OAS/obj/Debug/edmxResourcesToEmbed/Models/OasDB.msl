@@ -85,5 +85,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="fsRptCats">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsRptCat)">
+        <MappingFragment StoreEntitySet="fsRptCats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RptCatName" ColumnName="RptCatName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsRptCatAccnts">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsRptCatAccnt)">
+        <MappingFragment StoreEntitySet="fsRptCatAccnts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsAccountId" ColumnName="fsAccountId" />
+          <ScalarProperty Name="fsRptCatId" ColumnName="fsRptCatId" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -222,6 +222,12 @@
     <Compile Include="Models\fsConfigCode.cs">
       <DependentUpon>OasDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\fsRptCat.cs">
+      <DependentUpon>OasDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fsRptCatAccnt.cs">
+      <DependentUpon>OasDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\fsSubAccnt.cs">
       <DependentUpon>OasDB.tt</DependentUpon>
     </Compile>
@@ -358,6 +364,7 @@
     <Content Include="Views\fsReports\BalanceSheet.cshtml" />
     <Content Include="Views\fsReports\IncomeStatement.cshtml" />
     <Content Include="Views\fsReports\JournalList.cshtml" />
+    <Content Include="Views\fsReports\CashFlow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

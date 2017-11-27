@@ -19,29 +19,35 @@ namespace OAS.Controllers
 
         public ActionResult TrialBalance(int Mon, int Year)
         {
-            var data = db1.getTrialBalance(9, 2017);
+            var data = db1.getTrialBalance(Mon, Year);
             return View(data);
         }
         public ActionResult BalanceSheet(int Mon, int Year)
         {
-            var data = db1.getBalanceSheet(9, 2017);
+            var data = db1.getBalanceSheet(Mon, Year);
             return View(data);
         }
         public ActionResult IncomeStatement(int Mon, int Year)
         {
-            var data = db1.getBalanceSheet(9, 2017);
+            var data = db1.getBalanceSheet(Mon, Year);
             return View(data);
         }
         public ActionResult JournalList(int Mon, int Year)
         {
             var data = db.fsTrxDetails
-                .Where(d => d.fsTrxHdr.DtTrx.Month == 9 && d.fsTrxHdr.DtTrx.Year == 2017)
+                .Where(d => d.fsTrxHdr.DtTrx.Month == Mon && d.fsTrxHdr.DtTrx.Year == Year)
                 .OrderBy(s => s.fsTrxHdr.DtTrx)
                 .ToList();
 
             return View(data);
         }
+        public ActionResult CashFlow(int Mon, int Year)
+        {
+            var accnts = db.fsRptCatAccnts.Where(d => d.fsRptCat.RptCatName == "CASH").Select( s => s.fsAccount.AccntNo);
+            var data = db1.getTrialBalance(Mon, Year).Where(d => accnts.Contains(d.AccntNo) );
 
+            return View(data);
+        }
 
     }
 }

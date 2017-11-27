@@ -14,6 +14,8 @@
     <EntitySet Name="fsAccntSettings" EntityType="OasDB.Store.fsAccntSettings" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="fsConfigCodes" EntityType="OasDB.Store.fsConfigCodes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="fsTrxStatus" EntityType="OasDB.Store.fsTrxStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsRptCats" EntityType="OasDB.Store.fsRptCats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsRptCatAccnts" EntityType="OasDB.Store.fsRptCatAccnts" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="fsAccntCategoryfsAccount" Association="OasDB.Store.fsAccntCategoryfsAccount">
       <End Role="fsAccntCategory" EntitySet="fsAccntCategories" />
       <End Role="fsAccount" EntitySet="fsAccounts" />
@@ -41,6 +43,14 @@
     <AssociationSet Name="fsTrxStatusfsTrxHdr" Association="OasDB.Store.fsTrxStatusfsTrxHdr">
       <End Role="fsTrxStatus" EntitySet="fsTrxStatus" />
       <End Role="fsTrxHdr" EntitySet="fsTrxHdrs" />
+    </AssociationSet>
+    <AssociationSet Name="fsAccountfsRptCatAccnt" Association="OasDB.Store.fsAccountfsRptCatAccnt">
+      <End Role="fsAccount" EntitySet="fsAccounts" />
+      <End Role="fsRptCatAccnt" EntitySet="fsRptCatAccnts" />
+    </AssociationSet>
+    <AssociationSet Name="fsRptCatfsRptCatAccnt" Association="OasDB.Store.fsRptCatfsRptCatAccnt">
+      <End Role="fsRptCat" EntitySet="fsRptCats" />
+      <End Role="fsRptCatAccnt" EntitySet="fsRptCatAccnts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="fsAccounts">
@@ -118,6 +128,22 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="fsRptCats">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RptCatName" Type="nvarchar" Nullable="false" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="fsRptCatAccnts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fsAccountId" Type="int" Nullable="false" />
+    <Property Name="fsRptCatId" Type="int" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="fsAccntCategoryfsAccount">
     <End Role="fsAccntCategory" Type="OasDB.Store.fsAccntCategories" Multiplicity="1" />
@@ -203,6 +229,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fsAccountfsRptCatAccnt">
+    <End Role="fsAccount" Type="OasDB.Store.fsAccounts" Multiplicity="1" />
+    <End Role="fsRptCatAccnt" Type="OasDB.Store.fsRptCatAccnts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsAccount">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsRptCatAccnt">
+        <PropertyRef Name="fsAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsRptCatfsRptCatAccnt">
+    <End Role="fsRptCat" Type="OasDB.Store.fsRptCats" Multiplicity="1" />
+    <End Role="fsRptCatAccnt" Type="OasDB.Store.fsRptCatAccnts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsRptCat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsRptCatAccnt">
+        <PropertyRef Name="fsRptCatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -244,6 +294,16 @@
             <End Role="fsTrxStatus" EntitySet="fsTrxStatus" />
             <End Role="fsTrxHdr" EntitySet="fsTrxHdrs" />
           </AssociationSet>
+          <EntitySet Name="fsRptCats" EntityType="OasDB.fsRptCat" />
+          <EntitySet Name="fsRptCatAccnts" EntityType="OasDB.fsRptCatAccnt" />
+          <AssociationSet Name="fsAccountfsRptCatAccnt" Association="OasDB.fsAccountfsRptCatAccnt">
+            <End Role="fsAccount" EntitySet="fsAccounts" />
+            <End Role="fsRptCatAccnt" EntitySet="fsRptCatAccnts" />
+          </AssociationSet>
+          <AssociationSet Name="fsRptCatfsRptCatAccnt" Association="OasDB.fsRptCatfsRptCatAccnt">
+            <End Role="fsRptCat" EntitySet="fsRptCats" />
+            <End Role="fsRptCatAccnt" EntitySet="fsRptCatAccnts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="fsAccount">
           <Key>
@@ -258,6 +318,7 @@
           <Property Name="fsAccntCategoryId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="fsTrxDetails" Relationship="OasDB.fsAccountfsTrxDetail" FromRole="fsAccount" ToRole="fsTrxDetail" />
           <NavigationProperty Name="fsSubAccnts" Relationship="OasDB.fsAccountfsSubAccnt" FromRole="fsAccount" ToRole="fsSubAccnt" />
+          <NavigationProperty Name="fsRptCatAccnts" Relationship="OasDB.fsAccountfsRptCatAccnt" FromRole="fsAccount" ToRole="fsRptCatAccnt" />
         </EntityType>
         <EntityType Name="fsAccntCategory">
           <Key>
@@ -419,6 +480,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="fsRptCat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RptCatName" Type="String" Nullable="false" MaxLength="80" />
+          <NavigationProperty Name="fsRptCatAccnts" Relationship="OasDB.fsRptCatfsRptCatAccnt" FromRole="fsRptCat" ToRole="fsRptCatAccnt" />
+        </EntityType>
+        <EntityType Name="fsRptCatAccnt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="fsAccount" Relationship="OasDB.fsAccountfsRptCatAccnt" FromRole="fsRptCatAccnt" ToRole="fsAccount" />
+          <Property Name="fsAccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="fsRptCat" Relationship="OasDB.fsRptCatfsRptCatAccnt" FromRole="fsRptCatAccnt" ToRole="fsRptCat" />
+          <Property Name="fsRptCatId" Type="Int32" Nullable="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="fsAccountfsRptCatAccnt">
+          <End Type="OasDB.fsAccount" Role="fsAccount" Multiplicity="1" />
+          <End Type="OasDB.fsRptCatAccnt" Role="fsRptCatAccnt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fsAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="fsRptCatAccnt">
+              <PropertyRef Name="fsAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fsRptCatfsRptCatAccnt">
+          <End Type="OasDB.fsRptCat" Role="fsRptCat" Multiplicity="1" />
+          <End Type="OasDB.fsRptCatAccnt" Role="fsRptCatAccnt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fsRptCat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="fsRptCatAccnt">
+              <PropertyRef Name="fsRptCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -506,6 +610,24 @@
         <MappingFragment StoreEntitySet="fsTrxStatus">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsRptCats">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsRptCat)">
+        <MappingFragment StoreEntitySet="fsRptCats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RptCatName" ColumnName="RptCatName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsRptCatAccnts">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsRptCatAccnt)">
+        <MappingFragment StoreEntitySet="fsRptCatAccnts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsAccountId" ColumnName="fsAccountId" />
+          <ScalarProperty Name="fsRptCatId" ColumnName="fsRptCatId" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/13/2017 15:46:36
+-- Date Created: 11/27/2017 13:32:15
 -- Generated from EDMX file: D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\Models\OasDB.edmx
 -- --------------------------------------------------
 
@@ -38,6 +38,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_fsTrxStatusfsTrxHdr]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[fsTrxHdrs] DROP CONSTRAINT [FK_fsTrxStatusfsTrxHdr];
 GO
+IF OBJECT_ID(N'[dbo].[FK_fsAccountfsRptCatAccnt]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[fsRptCatAccnts] DROP CONSTRAINT [FK_fsAccountfsRptCatAccnt];
+GO
+IF OBJECT_ID(N'[dbo].[FK_fsRptCatfsRptCatAccnt]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[fsRptCatAccnts] DROP CONSTRAINT [FK_fsRptCatfsRptCatAccnt];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -66,6 +72,12 @@ IF OBJECT_ID(N'[dbo].[fsConfigCodes]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[fsTrxStatus]', 'U') IS NOT NULL
     DROP TABLE [dbo].[fsTrxStatus];
+GO
+IF OBJECT_ID(N'[dbo].[fsRptCats]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[fsRptCats];
+GO
+IF OBJECT_ID(N'[dbo].[fsRptCatAccnts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[fsRptCatAccnts];
 GO
 
 -- --------------------------------------------------
@@ -148,6 +160,22 @@ CREATE TABLE [dbo].[fsTrxStatus] (
 );
 GO
 
+-- Creating table 'fsRptCats'
+CREATE TABLE [dbo].[fsRptCats] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [RptCatName] nvarchar(80)  NOT NULL
+);
+GO
+
+-- Creating table 'fsRptCatAccnts'
+CREATE TABLE [dbo].[fsRptCatAccnts] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [fsAccountId] int  NOT NULL,
+    [fsRptCatId] int  NOT NULL,
+    [Sort] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -197,6 +225,18 @@ GO
 -- Creating primary key on [Id] in table 'fsTrxStatus'
 ALTER TABLE [dbo].[fsTrxStatus]
 ADD CONSTRAINT [PK_fsTrxStatus]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'fsRptCats'
+ALTER TABLE [dbo].[fsRptCats]
+ADD CONSTRAINT [PK_fsRptCats]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'fsRptCatAccnts'
+ALTER TABLE [dbo].[fsRptCatAccnts]
+ADD CONSTRAINT [PK_fsRptCatAccnts]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -307,6 +347,36 @@ GO
 CREATE INDEX [IX_FK_fsTrxStatusfsTrxHdr]
 ON [dbo].[fsTrxHdrs]
     ([fsTrxStatusId]);
+GO
+
+-- Creating foreign key on [fsAccountId] in table 'fsRptCatAccnts'
+ALTER TABLE [dbo].[fsRptCatAccnts]
+ADD CONSTRAINT [FK_fsAccountfsRptCatAccnt]
+    FOREIGN KEY ([fsAccountId])
+    REFERENCES [dbo].[fsAccounts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_fsAccountfsRptCatAccnt'
+CREATE INDEX [IX_FK_fsAccountfsRptCatAccnt]
+ON [dbo].[fsRptCatAccnts]
+    ([fsAccountId]);
+GO
+
+-- Creating foreign key on [fsRptCatId] in table 'fsRptCatAccnts'
+ALTER TABLE [dbo].[fsRptCatAccnts]
+ADD CONSTRAINT [FK_fsRptCatfsRptCatAccnt]
+    FOREIGN KEY ([fsRptCatId])
+    REFERENCES [dbo].[fsRptCats]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_fsRptCatfsRptCatAccnt'
+CREATE INDEX [IX_FK_fsRptCatfsRptCatAccnt]
+ON [dbo].[fsRptCatAccnts]
+    ([fsRptCatId]);
 GO
 
 -- --------------------------------------------------

@@ -19,6 +19,7 @@ namespace OAS.Models
         {
             this.fsTrxDetails = new HashSet<fsTrxDetail>();
             this.fsSubAccnts = new HashSet<fsSubAccnt>();
+            this.fsRptCatAccnts = new HashSet<fsRptCatAccnt>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,7 @@ namespace OAS.Models
         public virtual ICollection<fsTrxDetail> fsTrxDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fsSubAccnt> fsSubAccnts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fsRptCatAccnt> fsRptCatAccnts { get; set; }
     }
 }
