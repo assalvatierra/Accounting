@@ -86,7 +86,7 @@ left join fsTrxHdrs c on c.Id = b.fsTrxHdrId
 left outer join fsAccntCategories d on d.Id = a.fsAccntCategoryId
 where
 c.Id is null 
-OR ( DATEPART(mm, c.DtTrx) = '9' AND DATEPART(yy, c.DtTrx) = '2017' )
+OR ( DATEPART(mm, c.DtTrx) = '"+ mon.ToString() +"' AND DATEPART(yy, c.DtTrx) = '"+ year.ToString() +@"' )
 
 union
 
@@ -106,8 +106,8 @@ where
 c.Id is null 
 OR 
 	( 
-		( DATEPART(yy, c.DtTrx) < '2017' ) OR
-		( DATEPART(mm, c.DtTrx) < '9' AND DATEPART(yy, c.DtTrx) = '2017' )
+		( DATEPART(yy, c.DtTrx) < '"+year.ToString()+@"' ) OR
+		( DATEPART(mm, c.DtTrx) < '"+mon.ToString()+"' AND DATEPART(yy, c.DtTrx) = '"+year.ToString()+@"' )
 	)
 
 ) as x
