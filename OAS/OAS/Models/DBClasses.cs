@@ -36,6 +36,18 @@ namespace OAS.Models
     {
         Models.OasDBContainer db = new OasDBContainer();
 
+        public List<fsEntity> getUserEntities(string user)
+        {
+            var entities = db.fsEntityUsers.Where(d => d.fsUser.LoginName == user).Select(s => s.fsEntityId);
+            var data = db.fsEntities.Where(d => entities.Contains(d.Id)).ToList();
+            return data;
+        }
+
+        public fsEntity getEntity(int id)
+        {
+            return db.fsEntities.Find(id);
+        }
+
         public List<cTrialBalance> getTrialBalance(int mon, int year)
         {
             string sSQL = @"
@@ -51,7 +63,7 @@ namespace OAS.Models
                 left outer join fsSubAccnts d on d.Id = a.fsSubAccntId
                 where b.fsTrxStatusId = '3'
                 and DATEPART(mm, b.DtTrx) = '" + mon.ToString() + @"'
-                and DATEPART(yy, b.DtTrx) = '"+ year.ToString() + @"'
+                and DATEPART(yy, b.DtTrx) = '" + year.ToString() + @"'
                 order by c.AccntNo, b.DtTrx;
             ";
 
@@ -86,7 +98,7 @@ left join fsTrxHdrs c on c.Id = b.fsTrxHdrId
 left outer join fsAccntCategories d on d.Id = a.fsAccntCategoryId
 where
 c.Id is null 
-OR ( DATEPART(mm, c.DtTrx) = '"+ mon.ToString() +"' AND DATEPART(yy, c.DtTrx) = '"+ year.ToString() +@"' )
+OR ( DATEPART(mm, c.DtTrx) = '" + mon.ToString() + "' AND DATEPART(yy, c.DtTrx) = '" + year.ToString() + @"' )
 
 union
 
@@ -106,8 +118,8 @@ where
 c.Id is null 
 OR 
 	( 
-		( DATEPART(yy, c.DtTrx) < '"+year.ToString()+@"' ) OR
-		( DATEPART(mm, c.DtTrx) < '"+mon.ToString()+"' AND DATEPART(yy, c.DtTrx) = '"+year.ToString()+@"' )
+		( DATEPART(yy, c.DtTrx) < '" + year.ToString() + @"' ) OR
+		( DATEPART(mm, c.DtTrx) < '" + mon.ToString() + "' AND DATEPART(yy, c.DtTrx) = '" + year.ToString() + @"' )
 	)
 
 ) as x
@@ -123,6 +135,23 @@ group by x.Id
 
 
         }
+
+    }
+
+    public class WebClasses
+    {
+        public int getEntityId(HttpContextBase context)
+        {
+            int iEntId = 0;
+            if (context.Session["UserEntity"] != null)
+            {
+                fsEntity Entity;
+                Entity = (fsEntity)context.Session["UserEntity"];
+                iEntId = Entity.Id;
+            }
+            return iEntId;
+        }
+
     }
 
 }

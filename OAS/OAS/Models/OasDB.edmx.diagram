@@ -5,25 +5,33 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4ec757afa56c4726a5d96b2877140d2c" Name="Diagram1" ZoomLevel="86" >
-        <EntityTypeShape EntityType="OasDB.fsAccount" Width="1.5" PointX="4.5" PointY="0.5" />
-        <EntityTypeShape EntityType="OasDB.fsAccntCategory" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="OasDB.fsAccount" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OasDB.fsAccntCategory" Width="1.5" PointX="2.5" PointY="0.625" />
         <AssociationConnector Association="OasDB.fsAccntCategoryfsAccount" />
-        <EntityTypeShape EntityType="OasDB.fsTrxHdr" Width="1.5" PointX="2.5" PointY="5.5" />
-        <EntityTypeShape EntityType="OasDB.fsTrxDetail" Width="1.5" PointX="4.625" PointY="5.5" />
+        <EntityTypeShape EntityType="OasDB.fsTrxHdr" Width="1.5" PointX="7.5" PointY="6" />
+        <EntityTypeShape EntityType="OasDB.fsTrxDetail" Width="1.5" PointX="5" PointY="6.125" />
         <AssociationConnector Association="OasDB.fsAccountfsTrxDetail" />
         <AssociationConnector Association="OasDB.fsTrxHdrfsTrxDetail" />
-        <EntityTypeShape EntityType="OasDB.fsSubAccnt" Width="1.5" PointX="6.875" PointY="0.5" />
+        <EntityTypeShape EntityType="OasDB.fsSubAccnt" Width="1.5" PointX="7.5" PointY="3.125" />
         <AssociationConnector Association="OasDB.fsAccountfsSubAccnt" />
         <AssociationConnector Association="OasDB.fsSubAccntfsTrxDetail" />
-        <EntityTypeShape EntityType="OasDB.fsAccntSetting" Width="1.5" PointX="9" PointY="2.875" />
-        <EntityTypeShape EntityType="OasDB.fsConfigCode" Width="1.5" PointX="9" PointY="0.5" />
+        <EntityTypeShape EntityType="OasDB.fsAccntSetting" Width="1.5" PointX="2.375" PointY="8.375" />
+        <EntityTypeShape EntityType="OasDB.fsConfigCode" Width="1.5" PointX="2.375" PointY="6.25" />
         <AssociationConnector Association="OasDB.fsConfigCodefsAccntSetting" />
-        <EntityTypeShape EntityType="OasDB.fsTrxStatus" Width="1.5" PointX="0.5" PointY="5.625" />
+        <EntityTypeShape EntityType="OasDB.fsTrxStatus" Width="1.5" PointX="9.75" PointY="7.875" />
         <AssociationConnector Association="OasDB.fsTrxStatusfsTrxHdr" />
         <EntityTypeShape EntityType="OasDB.fsRptCat" Width="1.5" PointX="0.5" PointY="2.75" />
-        <EntityTypeShape EntityType="OasDB.fsRptCatAccnt" Width="1.5" PointX="2.5" PointY="2.75" />
+        <EntityTypeShape EntityType="OasDB.fsRptCatAccnt" Width="1.5" PointX="2.5" PointY="3.125" />
         <AssociationConnector Association="OasDB.fsAccountfsRptCatAccnt" />
         <AssociationConnector Association="OasDB.fsRptCatfsRptCatAccnt" />
+        <EntityTypeShape EntityType="OasDB.fsEntity" Width="1.5" PointX="9.75" PointY="1" />
+        <EntityTypeShape EntityType="OasDB.fsUser" Width="1.5" PointX="12.375" PointY="0.5" />
+        <EntityTypeShape EntityType="OasDB.fsEntityUsers" Width="1.5" PointX="12.375" PointY="2.75" />
+        <AssociationConnector Association="OasDB.fsEntityfsEntityUsers" />
+        <AssociationConnector Association="OasDB.fsUserfsEntityUsers" />
+        <AssociationConnector Association="OasDB.fsEntityfsAccount" />
+        <AssociationConnector Association="OasDB.fsEntityfsSubAccnt" />
+        <AssociationConnector Association="OasDB.fsEntityfsTrxHdr" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

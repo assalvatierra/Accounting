@@ -13,11 +13,13 @@ namespace OAS.Controllers
     public class fsSubAccntsController : Controller
     {
         private OasDBContainer db = new OasDBContainer();
+        private WebClasses wb = new WebClasses();
 
         // GET: fsSubAccnts
         public ActionResult Index()
         {
             var fsSubAccnts = db.fsSubAccnts.Include(f => f.fsAccount);
+            fsSubAccnts.Where(d => d.fsEntityId == wb.getEntityId(this.HttpContext));
             return View(fsSubAccnts.ToList());
         }
 
@@ -50,6 +52,12 @@ namespace OAS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,fsAccountId,Name,Remarks")] fsSubAccnt fsSubAccnt)
         {
+            if (Session["UserEntity"] != null)
+            {
+                var temp = (fsEntity)Session["UserEntity"];
+                fsSubAccnt.fsEntityId = temp.Id;
+            }
+
             if (ModelState.IsValid)
             {
                 db.fsSubAccnts.Add(fsSubAccnt);

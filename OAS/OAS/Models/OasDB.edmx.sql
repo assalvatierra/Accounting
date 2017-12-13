@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/27/2017 13:32:15
+-- Date Created: 12/13/2017 14:37:34
 -- Generated from EDMX file: D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\Models\OasDB.edmx
 -- --------------------------------------------------
 
@@ -44,6 +44,21 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_fsRptCatfsRptCatAccnt]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[fsRptCatAccnts] DROP CONSTRAINT [FK_fsRptCatfsRptCatAccnt];
 GO
+IF OBJECT_ID(N'[dbo].[FK_fsEntityfsEntityUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[fsEntityUsers] DROP CONSTRAINT [FK_fsEntityfsEntityUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_fsUserfsEntityUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[fsEntityUsers] DROP CONSTRAINT [FK_fsUserfsEntityUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_fsEntityfsAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[fsAccounts] DROP CONSTRAINT [FK_fsEntityfsAccount];
+GO
+IF OBJECT_ID(N'[dbo].[FK_fsEntityfsSubAccnt]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[fsSubAccnts] DROP CONSTRAINT [FK_fsEntityfsSubAccnt];
+GO
+IF OBJECT_ID(N'[dbo].[FK_fsEntityfsTrxHdr]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[fsTrxHdrs] DROP CONSTRAINT [FK_fsEntityfsTrxHdr];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -79,6 +94,15 @@ GO
 IF OBJECT_ID(N'[dbo].[fsRptCatAccnts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[fsRptCatAccnts];
 GO
+IF OBJECT_ID(N'[dbo].[fsEntities]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[fsEntities];
+GO
+IF OBJECT_ID(N'[dbo].[fsUsers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[fsUsers];
+GO
+IF OBJECT_ID(N'[dbo].[fsEntityUsers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[fsEntityUsers];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -91,7 +115,8 @@ CREATE TABLE [dbo].[fsAccounts] (
     [AccntTitle] nvarchar(150)  NOT NULL,
     [Description] nvarchar(250)  NULL,
     [IncreaseCode] nvarchar(2)  NOT NULL,
-    [fsAccntCategoryId] int  NOT NULL
+    [fsAccntCategoryId] int  NOT NULL,
+    [fsEntityId] int  NOT NULL
 );
 GO
 
@@ -112,7 +137,8 @@ CREATE TABLE [dbo].[fsTrxHdrs] (
     [EnteredBy] nvarchar(80)  NOT NULL,
     [dtEdit] datetime  NULL,
     [EditedBy] nvarchar(80)  NULL,
-    [fsTrxStatusId] int  NOT NULL
+    [fsTrxStatusId] int  NOT NULL,
+    [fsEntityId] int  NOT NULL
 );
 GO
 
@@ -133,7 +159,8 @@ CREATE TABLE [dbo].[fsSubAccnts] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [fsAccountId] int  NOT NULL,
     [Name] nvarchar(80)  NOT NULL,
-    [Remarks] nvarchar(180)  NULL
+    [Remarks] nvarchar(180)  NULL,
+    [fsEntityId] int  NOT NULL
 );
 GO
 
@@ -173,6 +200,29 @@ CREATE TABLE [dbo].[fsRptCatAccnts] (
     [fsAccountId] int  NOT NULL,
     [fsRptCatId] int  NOT NULL,
     [Sort] int  NOT NULL
+);
+GO
+
+-- Creating table 'fsEntities'
+CREATE TABLE [dbo].[fsEntities] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'fsUsers'
+CREATE TABLE [dbo].[fsUsers] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [LoginName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'fsEntityUsers'
+CREATE TABLE [dbo].[fsEntityUsers] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [fsEntityId] int  NOT NULL,
+    [fsUserId] int  NOT NULL,
+    [isAdmin] int  NOT NULL
 );
 GO
 
@@ -237,6 +287,24 @@ GO
 -- Creating primary key on [Id] in table 'fsRptCatAccnts'
 ALTER TABLE [dbo].[fsRptCatAccnts]
 ADD CONSTRAINT [PK_fsRptCatAccnts]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'fsEntities'
+ALTER TABLE [dbo].[fsEntities]
+ADD CONSTRAINT [PK_fsEntities]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'fsUsers'
+ALTER TABLE [dbo].[fsUsers]
+ADD CONSTRAINT [PK_fsUsers]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'fsEntityUsers'
+ALTER TABLE [dbo].[fsEntityUsers]
+ADD CONSTRAINT [PK_fsEntityUsers]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -379,6 +447,81 @@ ON [dbo].[fsRptCatAccnts]
     ([fsRptCatId]);
 GO
 
+-- Creating foreign key on [fsEntityId] in table 'fsEntityUsers'
+ALTER TABLE [dbo].[fsEntityUsers]
+ADD CONSTRAINT [FK_fsEntityfsEntityUsers]
+    FOREIGN KEY ([fsEntityId])
+    REFERENCES [dbo].[fsEntities]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_fsEntityfsEntityUsers'
+CREATE INDEX [IX_FK_fsEntityfsEntityUsers]
+ON [dbo].[fsEntityUsers]
+    ([fsEntityId]);
+GO
+
+-- Creating foreign key on [fsUserId] in table 'fsEntityUsers'
+ALTER TABLE [dbo].[fsEntityUsers]
+ADD CONSTRAINT [FK_fsUserfsEntityUsers]
+    FOREIGN KEY ([fsUserId])
+    REFERENCES [dbo].[fsUsers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_fsUserfsEntityUsers'
+CREATE INDEX [IX_FK_fsUserfsEntityUsers]
+ON [dbo].[fsEntityUsers]
+    ([fsUserId]);
+GO
+
+-- Creating foreign key on [fsEntityId] in table 'fsAccounts'
+ALTER TABLE [dbo].[fsAccounts]
+ADD CONSTRAINT [FK_fsEntityfsAccount]
+    FOREIGN KEY ([fsEntityId])
+    REFERENCES [dbo].[fsEntities]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_fsEntityfsAccount'
+CREATE INDEX [IX_FK_fsEntityfsAccount]
+ON [dbo].[fsAccounts]
+    ([fsEntityId]);
+GO
+
+-- Creating foreign key on [fsEntityId] in table 'fsSubAccnts'
+ALTER TABLE [dbo].[fsSubAccnts]
+ADD CONSTRAINT [FK_fsEntityfsSubAccnt]
+    FOREIGN KEY ([fsEntityId])
+    REFERENCES [dbo].[fsEntities]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_fsEntityfsSubAccnt'
+CREATE INDEX [IX_FK_fsEntityfsSubAccnt]
+ON [dbo].[fsSubAccnts]
+    ([fsEntityId]);
+GO
+
+-- Creating foreign key on [fsEntityId] in table 'fsTrxHdrs'
+ALTER TABLE [dbo].[fsTrxHdrs]
+ADD CONSTRAINT [FK_fsEntityfsTrxHdr]
+    FOREIGN KEY ([fsEntityId])
+    REFERENCES [dbo].[fsEntities]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_fsEntityfsTrxHdr'
+CREATE INDEX [IX_FK_fsEntityfsTrxHdr]
+ON [dbo].[fsTrxHdrs]
+    ([fsEntityId]);
+GO
+
 -- --------------------------------------------------
 -- Script has ended
--- --------------------------------------------------
+-- --------------------------------------------------f

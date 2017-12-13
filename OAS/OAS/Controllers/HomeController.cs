@@ -8,9 +8,51 @@ namespace OAS.Controllers
 {
     public class HomeController : Controller
     {
+        Models.DBClasses db1 = new Models.DBClasses();
+
         public ActionResult Index()
         {
+            if (!this.HttpContext.User.Identity.IsAuthenticated)
+                Session["UserEntity"] = null;
+
+            var fsEnt = db1.getUserEntities(this.HttpContext.User.Identity.Name);
+
+            if(fsEnt.Count==1)
+            {
+                var tmp = fsEnt.FirstOrDefault();
+                Session["UserEntity"] = tmp;
+            }
+
+            if(fsEnt.Count > 0 )
+            {
+                if (Session["UserEntity"] == null)
+                {
+                    return RedirectToAction("EntityList");
+                }
+                else
+                {
+                    Models.fsEntity tmp = (Models.fsEntity)Session["UserEntity"];
+                    if (!fsEnt.Select(s => s.Name).ToList().Contains(tmp.Name)) 
+                    {
+                        return RedirectToAction("EntityList");
+                    }
+                }
+            }
+
+            ViewBag.Entity = Session["UserEntity"];
             return View();
+        }
+
+        public ActionResult EntityList()
+        {
+            var fsEnt = db1.getUserEntities(this.HttpContext.User.Identity.Name);
+            return View(fsEnt);
+        }
+
+        public ActionResult SelectEntity(int? id)
+        {
+            Session["UserEntity"] = db1.getEntity( (int)id );
+            return RedirectToAction("index");
         }
 
         public ActionResult TransactionList()

@@ -11,6 +11,9 @@
     <EntitySet Name="fsTrxStatus" EntityType="OasDB.Store.fsTrxStatus" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="fsRptCats" EntityType="OasDB.Store.fsRptCats" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="fsRptCatAccnts" EntityType="OasDB.Store.fsRptCatAccnts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsEntities" EntityType="OasDB.Store.fsEntities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsUsers" EntityType="OasDB.Store.fsUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="fsEntityUsers" EntityType="OasDB.Store.fsEntityUsers" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="fsAccntCategoryfsAccount" Association="OasDB.Store.fsAccntCategoryfsAccount">
       <End Role="fsAccntCategory" EntitySet="fsAccntCategories" />
       <End Role="fsAccount" EntitySet="fsAccounts" />
@@ -47,6 +50,26 @@
       <End Role="fsRptCat" EntitySet="fsRptCats" />
       <End Role="fsRptCatAccnt" EntitySet="fsRptCatAccnts" />
     </AssociationSet>
+    <AssociationSet Name="fsEntityfsEntityUsers" Association="OasDB.Store.fsEntityfsEntityUsers">
+      <End Role="fsEntity" EntitySet="fsEntities" />
+      <End Role="fsEntityUsers" EntitySet="fsEntityUsers" />
+    </AssociationSet>
+    <AssociationSet Name="fsUserfsEntityUsers" Association="OasDB.Store.fsUserfsEntityUsers">
+      <End Role="fsUser" EntitySet="fsUsers" />
+      <End Role="fsEntityUsers" EntitySet="fsEntityUsers" />
+    </AssociationSet>
+    <AssociationSet Name="fsEntityfsAccount" Association="OasDB.Store.fsEntityfsAccount">
+      <End Role="fsEntity" EntitySet="fsEntities" />
+      <End Role="fsAccount" EntitySet="fsAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="fsEntityfsSubAccnt" Association="OasDB.Store.fsEntityfsSubAccnt">
+      <End Role="fsEntity" EntitySet="fsEntities" />
+      <End Role="fsSubAccnt" EntitySet="fsSubAccnts" />
+    </AssociationSet>
+    <AssociationSet Name="fsEntityfsTrxHdr" Association="OasDB.Store.fsEntityfsTrxHdr">
+      <End Role="fsEntity" EntitySet="fsEntities" />
+      <End Role="fsTrxHdr" EntitySet="fsTrxHdrs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="fsAccounts">
     <Key>
@@ -58,6 +81,7 @@
     <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="250" />
     <Property Name="IncreaseCode" Type="nvarchar" Nullable="false" MaxLength="2" />
     <Property Name="fsAccntCategoryId" Type="int" Nullable="false" />
+    <Property Name="fsEntityId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="fsAccntCategories">
     <Key>
@@ -79,6 +103,7 @@
     <Property Name="dtEdit" Type="datetime" Nullable="true" />
     <Property Name="EditedBy" Type="nvarchar" Nullable="true" MaxLength="80" />
     <Property Name="fsTrxStatusId" Type="int" Nullable="false" />
+    <Property Name="fsEntityId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="fsTrxDetails">
     <Key>
@@ -100,6 +125,7 @@
     <Property Name="fsAccountId" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="80" />
     <Property Name="Remarks" Type="nvarchar" Nullable="true" MaxLength="180" />
+    <Property Name="fsEntityId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="fsAccntSettings">
     <Key>
@@ -139,6 +165,29 @@
     <Property Name="fsAccountId" Type="int" Nullable="false" />
     <Property Name="fsRptCatId" Type="int" Nullable="false" />
     <Property Name="Sort" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fsEntities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fsUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoginName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fsEntityUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fsEntityId" Type="int" Nullable="false" />
+    <Property Name="fsUserId" Type="int" Nullable="false" />
+    <Property Name="isAdmin" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="fsAccntCategoryfsAccount">
     <End Role="fsAccntCategory" Type="OasDB.Store.fsAccntCategories" Multiplicity="1" />
@@ -245,6 +294,66 @@
       </Principal>
       <Dependent Role="fsRptCatAccnt">
         <PropertyRef Name="fsRptCatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsEntityfsEntityUsers">
+    <End Role="fsEntity" Type="OasDB.Store.fsEntities" Multiplicity="1" />
+    <End Role="fsEntityUsers" Type="OasDB.Store.fsEntityUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsEntity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsEntityUsers">
+        <PropertyRef Name="fsEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsUserfsEntityUsers">
+    <End Role="fsUser" Type="OasDB.Store.fsUsers" Multiplicity="1" />
+    <End Role="fsEntityUsers" Type="OasDB.Store.fsEntityUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsEntityUsers">
+        <PropertyRef Name="fsUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsEntityfsAccount">
+    <End Role="fsEntity" Type="OasDB.Store.fsEntities" Multiplicity="1" />
+    <End Role="fsAccount" Type="OasDB.Store.fsAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsEntity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsAccount">
+        <PropertyRef Name="fsEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsEntityfsSubAccnt">
+    <End Role="fsEntity" Type="OasDB.Store.fsEntities" Multiplicity="1" />
+    <End Role="fsSubAccnt" Type="OasDB.Store.fsSubAccnts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsEntity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsSubAccnt">
+        <PropertyRef Name="fsEntityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fsEntityfsTrxHdr">
+    <End Role="fsEntity" Type="OasDB.Store.fsEntities" Multiplicity="1" />
+    <End Role="fsTrxHdr" Type="OasDB.Store.fsTrxHdrs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fsEntity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fsTrxHdr">
+        <PropertyRef Name="fsEntityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

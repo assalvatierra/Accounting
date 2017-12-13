@@ -28,6 +28,7 @@ namespace OAS.Models
         public string Description { get; set; }
         public string IncreaseCode { get; set; }
         public int fsAccntCategoryId { get; set; }
+        public int fsEntityId { get; set; }
     
         public virtual fsAccntCategory fsAccntCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -36,5 +37,6 @@ namespace OAS.Models
         public virtual ICollection<fsSubAccnt> fsSubAccnts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fsRptCatAccnt> fsRptCatAccnts { get; set; }
+        public virtual fsEntity fsEntity { get; set; }
     }
 }

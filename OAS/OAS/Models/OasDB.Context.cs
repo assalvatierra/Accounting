@@ -35,5 +35,8 @@ namespace OAS.Models
         public virtual DbSet<fsTrxStatus> fsTrxStatus { get; set; }
         public virtual DbSet<fsRptCat> fsRptCats { get; set; }
         public virtual DbSet<fsRptCatAccnt> fsRptCatAccnts { get; set; }
+        public virtual DbSet<fsEntity> fsEntities { get; set; }
+        public virtual DbSet<fsUser> fsUsers { get; set; }
+        public virtual DbSet<fsEntityUsers> fsEntityUsers { get; set; }
     }
 }

@@ -222,6 +222,12 @@
     <Compile Include="Models\fsConfigCode.cs">
       <DependentUpon>OasDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\fsEntity.cs">
+      <DependentUpon>OasDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fsEntityUsers.cs">
+      <DependentUpon>OasDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\fsRptCat.cs">
       <DependentUpon>OasDB.tt</DependentUpon>
     </Compile>
@@ -238,6 +244,9 @@
       <DependentUpon>OasDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fsTrxStatus.cs">
+      <DependentUpon>OasDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fsUser.cs">
       <DependentUpon>OasDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -365,6 +374,7 @@
     <Content Include="Views\fsReports\IncomeStatement.cshtml" />
     <Content Include="Views\fsReports\JournalList.cshtml" />
     <Content Include="Views\fsReports\CashFlow.cshtml" />
+    <Content Include="Views\Home\EntityList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

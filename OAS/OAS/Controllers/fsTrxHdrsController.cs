@@ -13,11 +13,13 @@ namespace OAS.Controllers
     public class fsTrxHdrsController : Controller
     {
         private OasDBContainer db = new OasDBContainer();
+        private WebClasses wb = new WebClasses();
 
         // GET: fsTrxHdrs
         public ActionResult Index()
         {
             var fsTrxHdrs = db.fsTrxHdrs.Include(f => f.fsTrxStatus);
+            fsTrxHdrs.Where(d => d.fsEntityId== wb.getEntityId(this.HttpContext) );
             return View(fsTrxHdrs.ToList());
         }
 
@@ -55,6 +57,12 @@ namespace OAS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,DtTrx,trxRemarks,dtEntry,EnteredBy,dtEdit,EditedBy,fsTrxStatusId")] fsTrxHdr fsTrxHdr)
         {
+            if (Session["UserEntity"] != null)
+            {
+                var temp = (fsEntity)Session["UserEntity"];
+                fsTrxHdr.fsEntityId = temp.Id;
+            }
+
             if (ModelState.IsValid)
             {
                 db.fsTrxHdrs.Add(fsTrxHdr);

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<OAS.Models.fsEntity>
+
+@{
+    ViewBag.Title = "EntityList";
+}
+
+<h2>Select your Organization</h2>
+
+<table class="table">
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "SelectEntity", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>
