@@ -3,9 +3,17 @@
 @{
     ViewBag.Title = "Index";
     string vCat = "";
+    OAS.Models.fsEntity Entity = (OAS.Models.fsEntity)ViewBag.Entity;
 }
 
 <h2>Chart of Accounts</h2>
+@if (Entity != null)
+{
+    <br />
+            <span>
+                Company: @Entity.Name
+            </span>
+}
 
 <p>
     @Html.ActionLink("Create New", "Create")

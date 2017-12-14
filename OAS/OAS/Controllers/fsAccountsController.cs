@@ -17,9 +17,9 @@ namespace OAS.Controllers
         // GET: fsAccounts
         public ActionResult Index()
         {
-            var fsAccounts = db.fsAccounts.Include(f => f.fsAccntCategory);
-            fsAccounts.Where(d=>d.fsEntityId == wb.getEntityId( this.HttpContext) );
-
+            int entId = wb.getEntityId(this.HttpContext);
+            var fsAccounts = db.fsAccounts.Include(f => f.fsAccntCategory).Where(d => d.fsEntityId == entId);
+            ViewBag.Entity = db.fsEntities.Find(entId);
             return View(fsAccounts.ToList());
         }
 

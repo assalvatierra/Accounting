@@ -18,8 +18,8 @@ namespace OAS.Controllers
         // GET: fsSubAccnts
         public ActionResult Index()
         {
-            var fsSubAccnts = db.fsSubAccnts.Include(f => f.fsAccount);
-            fsSubAccnts.Where(d => d.fsEntityId == wb.getEntityId(this.HttpContext));
+            int entId = wb.getEntityId(this.HttpContext);
+            var fsSubAccnts = db.fsSubAccnts.Include(f => f.fsAccount).Where(d => d.fsEntityId == entId );
             return View(fsSubAccnts.ToList());
         }
 

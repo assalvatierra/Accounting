@@ -18,8 +18,8 @@ namespace OAS.Controllers
         // GET: fsTrxHdrs
         public ActionResult Index()
         {
-            var fsTrxHdrs = db.fsTrxHdrs.Include(f => f.fsTrxStatus);
-            fsTrxHdrs.Where(d => d.fsEntityId== wb.getEntityId(this.HttpContext) );
+            int entId = wb.getEntityId(this.HttpContext);
+            var fsTrxHdrs = db.fsTrxHdrs.Include(f => f.fsTrxStatus).Where(d => d.fsEntityId== entId );
             return View(fsTrxHdrs.ToList());
         }
 
@@ -57,11 +57,14 @@ namespace OAS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,DtTrx,trxRemarks,dtEntry,EnteredBy,dtEdit,EditedBy,fsTrxStatusId")] fsTrxHdr fsTrxHdr)
         {
-            if (Session["UserEntity"] != null)
-            {
-                var temp = (fsEntity)Session["UserEntity"];
-                fsTrxHdr.fsEntityId = temp.Id;
-            }
+            int entId = wb.getEntityId(this.HttpContext);
+            fsTrxHdr.fsEntityId = entId;
+
+            //if (Session["UserEntity"] != null)
+            //{
+            //    var temp = (fsEntity)Session["UserEntity"];
+            //    fsTrxHdr.fsEntityId = temp.Id;
+            //}
 
             if (ModelState.IsValid)
             {
@@ -95,7 +98,7 @@ namespace OAS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DtTrx,trxRemarks,dtEntry,EnteredBy,dtEdit,EditedBy,fsTrxStatusId")] fsTrxHdr fsTrxHdr)
+        public ActionResult Edit([Bind(Include = "Id,DtTrx,trxRemarks,dtEntry,EnteredBy,dtEdit,EditedBy,fsTrxStatusId,fsEntityId")] fsTrxHdr fsTrxHdr)
         {
             if (ModelState.IsValid)
             {
