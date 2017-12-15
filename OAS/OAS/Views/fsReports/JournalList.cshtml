@@ -39,7 +39,12 @@
         </td>
         <td>
             @item.fsAccountId-@item.fsAccount.AccntTitle
-            <br />&nbsp;&nbsp; @item.fsSubAccntId-@item.fsSubAccnt.Name
+            <br />&nbsp; 
+            @if (item.fsSubAccnt.Name != "Not Applicable")
+            {
+                <span style="color:darkgray;">&nbsp; @item.fsSubAccntId-@item.fsSubAccnt.Name</span>
+            }
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)

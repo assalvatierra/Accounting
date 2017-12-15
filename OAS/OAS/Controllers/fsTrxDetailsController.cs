@@ -13,6 +13,7 @@ namespace OAS.Controllers
     public class fsTrxDetailsController : Controller
     {
         private OasDBContainer db = new OasDBContainer();
+        private WebClasses wb = new WebClasses();
 
         // Get: Details by HdrId
         public ActionResult TrxDetails( int? hdrid)
@@ -60,9 +61,10 @@ namespace OAS.Controllers
             dtl.Credit = 0;
             dtl.fsSubAccntId = 0;
 
-            ViewBag.fsAccountId = new SelectList(db.fsAccounts.Select( d => new { Id = d.Id, Text = d.AccntNo + "-" + d.Description + "["+ d.IncreaseCode +"]"}), "Id", "Text");
+            int entId = wb.getEntityId(this.HttpContext);
+            ViewBag.fsAccountId = new SelectList(db.fsAccounts.Where(w=>w.fsEntityId==entId).Select( d => new { Id = d.Id, Text = d.AccntNo + "-" + d.Description + "["+ d.IncreaseCode +"]"}), "Id", "Text");
             ViewBag.fsTrxHdrId = new SelectList(db.fsTrxHdrs, "Id", "trxRemarks", hdrid);
-            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts.Select( d => new { Id = d.Id, Text = d.Id + "-" + d.Name }), "Id", "Text");
+            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts.Where(w => w.fsEntityId == entId).Select( d => new { Id = d.Id, Text = d.Id + "-" + d.Name }), "Id", "Text");
 
             return View(dtl);
         }
@@ -81,9 +83,10 @@ namespace OAS.Controllers
                 return RedirectToAction("TrxDetails");
             }
 
-            ViewBag.fsAccountId = new SelectList(db.fsAccounts, "Id", "AccntNo", fsTrxDetail.fsAccountId);
+            int entId = wb.getEntityId(this.HttpContext);
+            ViewBag.fsAccountId = new SelectList(db.fsAccounts.Where(w => w.fsEntityId == entId).Select(d => new { Id = d.Id, Text = d.AccntNo + "-" + d.Description + "[" + d.IncreaseCode + "]" }), "Id", "Text", fsTrxDetail.fsAccountId);
             ViewBag.fsTrxHdrId = new SelectList(db.fsTrxHdrs, "Id", "trxRemarks", fsTrxDetail.fsTrxHdrId);
-            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts, "Id", "Name", fsTrxDetail.fsSubAccntId);
+            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts.Where(w => w.fsEntityId == entId).Select(d => new { Id = d.Id, Text = d.Id + "-" + d.Name }), "Id", "Text", fsTrxDetail.fsSubAccntId);
             return View(fsTrxDetail);
         }
 
@@ -99,9 +102,10 @@ namespace OAS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.fsAccountId = new SelectList(db.fsAccounts, "Id", "AccntNo", fsTrxDetail.fsAccountId);
+            int entId = wb.getEntityId(this.HttpContext);
+            ViewBag.fsAccountId = new SelectList(db.fsAccounts.Where(w => w.fsEntityId == entId).Select(d => new { Id = d.Id, Text = d.AccntNo + "-" + d.Description + "[" + d.IncreaseCode + "]" }), "Id", "Text", fsTrxDetail.fsAccountId);
             ViewBag.fsTrxHdrId = new SelectList(db.fsTrxHdrs, "Id", "trxRemarks", fsTrxDetail.fsTrxHdrId);
-            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts, "Id", "Name", fsTrxDetail.fsSubAccntId);
+            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts.Where(w => w.fsEntityId == entId).Select(d => new { Id = d.Id, Text = d.Id + "-" + d.Name }), "Id", "Text", fsTrxDetail.fsSubAccntId);
             return View(fsTrxDetail);
         }
 
@@ -118,9 +122,10 @@ namespace OAS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("TrxDetails");
             }
-            ViewBag.fsAccountId = new SelectList(db.fsAccounts, "Id", "AccntNo", fsTrxDetail.fsAccountId);
+            int entId = wb.getEntityId(this.HttpContext);
+            ViewBag.fsAccountId = new SelectList(db.fsAccounts.Where(w => w.fsEntityId == entId).Select(d => new { Id = d.Id, Text = d.AccntNo + "-" + d.Description + "[" + d.IncreaseCode + "]" }), "Id", "Text", fsTrxDetail.fsAccountId);
             ViewBag.fsTrxHdrId = new SelectList(db.fsTrxHdrs, "Id", "trxRemarks", fsTrxDetail.fsTrxHdrId);
-            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts, "Id", "Name", fsTrxDetail.fsSubAccntId);
+            ViewBag.fsSubAccntId = new SelectList(db.fsSubAccnts.Where(w => w.fsEntityId == entId).Select(d => new { Id = d.Id, Text = d.Id + "-" + d.Name }), "Id", "Text", fsTrxDetail.fsSubAccntId);
             return View(fsTrxDetail);
         }
 
