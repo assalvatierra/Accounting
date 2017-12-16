@@ -1,0 +1,66 @@
+﻿@model OAS.Models.fsTrxDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>fsTrxDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Debit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Debit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Credit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Credit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fsAccount.AccntNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fsAccount.AccntNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fsTrxHdr.trxRemarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fsTrxHdr.trxRemarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fsSubAccnt.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fsSubAccnt.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<OAS.Models.fsTrxHdr>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Transaction List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Remarks
+        </th>
+        <th>
+            Entered
+        </th>
+        <th>
+            Edited
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.DtTrx.ToString("yyyy-MMM-dd")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.trxRemarks)
+        </td>
+        <td>
+            <span style="font-size:smaller;color:gray;">
+                @Html.DisplayFor(modelItem => item.EnteredBy)
+                @@
+                @Html.DisplayFor(modelItem => item.dtEntry)
+            </span>
+        </td>
+        <td>
+            <span style="font-size:smaller;color:gray;">
+                @Html.DisplayFor(modelItem => item.EditedBy)
+                @@
+                @Html.DisplayFor(modelItem => item.dtEdit)
+            </span>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fsTrxStatus.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "TrxDetails", "fsTrxDetails", new { hdrid = item.Id }, null) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    @Html.ActionLink("Home", "Index", "Home")
+</p>

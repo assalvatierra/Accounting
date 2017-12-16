@@ -1,0 +1,128 @@
+﻿@model IEnumerable<OAS.Models.cBalanceSheet>
+
+@{
+    ViewBag.Title = "IncomeStatement";
+
+    decimal dInc_open = 0;
+    decimal dInc_current = 0;
+    decimal dInc_total = 0;
+
+    decimal dExp_open = 0;
+    decimal dExp_current = 0;
+    decimal dExp_total = 0;
+
+}
+
+<h2>Income Statement</h2>
+
+<table class="table">
+    <!-- Income -->
+    <tr>
+        <th colspan="5">
+            <span>Revenue</span>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.catId == 4)
+        {
+            dInc_open += item.Openning;
+            dInc_current += item.CurrentTotal;
+            dInc_total += item.AccntTotal;
+        }
+        if (item.catId != 4) { continue; }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntDesc)
+            </td>
+            <td>
+                @( item.Openning == 0 ? "" : item.Openning.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.CurrentTotal == 0 ? "" : item.CurrentTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.AccntTotal == 0 ? "" : item.AccntTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+        </tr>
+
+    }
+    <tr style="background-color:lightgray;font:500 12px arial, verdana; ">
+        <th colspan="2" align="right">
+            <span>Total Revenue</span>
+        </th>
+        <td>@dInc_open.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dInc_current.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dInc_total.ToString("##,###.00;(##,###.00)")</td>
+    </tr>
+    <tr><td colspan="5">&nbsp;</td></tr>
+    <!-- end of Income -->
+
+    <!-- Expenses -->
+    <tr>
+        <th colspan="5">
+            <span>Expenses</span>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.catId == 5)
+        {
+            dExp_open += item.Openning;
+            dExp_current += item.CurrentTotal;
+            dExp_total += item.AccntTotal;
+        }
+        if (item.catId != 5) { continue; }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccntDesc)
+            </td>
+            <td>
+                @( item.Openning == 0 ? "" : item.Openning.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.CurrentTotal == 0 ? "" : item.CurrentTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+            <td>
+                @( item.AccntTotal == 0 ? "" : item.AccntTotal.ToString("##,###.00;(##,###.00)") )
+            </td>
+        </tr>
+
+    }
+    <tr style="background-color:lightgray;font:500 12px arial, verdana;">
+        <th colspan="2" align="right">
+            <span>Total Expense</span>
+        </th>
+        <td>@dExp_open.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dExp_current.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dExp_total.ToString("##,###.00;(##,###.00)")</td>
+    </tr>
+    <tr><td colspan="5">&nbsp;</td></tr>
+    <!-- end of Expenses -->
+
+    <tr style="background-color:lightgray;font:500 12px arial, verdana; color:blue;">
+        <th colspan="2" align="right">
+            <span>Net Income</span>
+        </th>
+
+        @{
+            decimal dNet_open = dInc_open + dExp_open;
+            decimal dNet_current = dInc_current + dExp_current;
+            decimal dNet_total = dInc_total + dExp_total;
+        }
+
+        <td>@dExp_open.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dExp_current.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dExp_total.ToString("##,###.00;(##,###.00)")</td>
+    </tr>
+    <tr><td colspan="5">&nbsp;</td></tr>
+
+
+
+</table>

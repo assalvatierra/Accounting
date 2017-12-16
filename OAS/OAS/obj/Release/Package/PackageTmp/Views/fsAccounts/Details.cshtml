@@ -1,0 +1,58 @@
+﻿@model OAS.Models.fsAccount
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>fsAccount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AccntNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccntNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccntTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccntTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncreaseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncreaseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fsAccntCategory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fsAccntCategory.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

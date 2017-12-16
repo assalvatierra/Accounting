@@ -302,6 +302,7 @@
     <Content Include="Models\OasDB.edmx.diagram">
       <DependentUpon>OasDB.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FtpPublish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

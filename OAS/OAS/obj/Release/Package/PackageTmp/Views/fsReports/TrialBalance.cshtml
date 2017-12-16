@@ -1,0 +1,111 @@
+﻿@model IEnumerable<OAS.Models.cTrialBalance>
+
+@{
+    ViewBag.Title = "TrialBalance";
+
+    string sAccnt = "";
+    decimal dDebit = 0;
+    decimal dCredit = 0;
+}
+
+<h2>Trial Balance</h2>
+
+<table class="table">
+    
+@foreach (var item in Model) {
+    if (sAccnt != item.AccntNo)
+    {
+        sAccnt = item.AccntNo;
+        dDebit = 0;
+        dCredit = 0;
+
+        <tr>
+            <td>
+                <span style="font:600 14px arial, verdana; color:darkblue;">
+                    @Html.DisplayFor(modelItem => item.AccntNo) -
+                    @Html.DisplayFor(modelItem => item.AccntTitle)
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr style="font:600 10px arial, verdana; color:darkblue;">
+                        <th>TrxId</th><th>Date</th><th>Description</th><th>Debit</th><th>Credit</th><th>SubAccnt</th>
+                    </tr>
+
+                @foreach (var TrxDtl in Model)
+                {
+                    if (TrxDtl.AccntNo == item.AccntNo)
+                    {
+                        dDebit += TrxDtl.Debit;
+                        dCredit += TrxDtl.Credit;
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => TrxDtl.TrxId)
+                        </td>
+                        <td style="font:400 12px arial, verdana; ">
+                            @TrxDtl.DtTrx.ToString("MMM-dd-yy")
+                        </td>
+                        <td style="font:400 12px arial, verdana; ">
+                            @Html.DisplayFor(modelItem => TrxDtl.Description)
+                        </td>
+                        <td>
+                            @(TrxDtl.Debit == 0 ? " " : TrxDtl.Debit.ToString("##,###.00")) 
+                        </td>
+                        <td>
+                            @(TrxDtl.Credit == 0 ? " " : TrxDtl.Credit.ToString("##,###.00"))
+                        </td>
+                        <td>
+                            @if (TrxDtl.SubAccntName != "Not Applicable")
+                            {
+                                <span style="font:400 9px arial, verdana; color: darkgray;">
+                                    @Html.DisplayFor(modelItem => TrxDtl.SubAccntId)
+                                    - @Html.DisplayFor(modelItem => TrxDtl.SubAccntName)
+                                </span>
+                            }
+
+                            
+                        </td>
+                    </tr>
+                    }
+                }
+
+                    <tr>
+                        @{ decimal dSubTotal = dDebit - dCredit; }
+                        <td colspan="2" >
+                            <span style="font:600 14px arial, verdana; color:darkblue;">
+                                Balance: @dSubTotal.ToString("##,###.00")
+                            </span>
+                        </td>
+                        <td align="right">
+                            <span style="font:600 12px arial, verdana; font-style:italic;">
+                                Sub-Total
+                            </span></td>
+                        <td>
+                            <span style="font:600 12px arial, verdana; color:darkblue;">
+                                @( dDebit==0? " " : dDebit.ToString("##,###.00") )
+                            </span>
+                        </td>
+                        <td>
+                            <span style="font:600 12px arial, verdana; color:darkblue;">
+                                @( dCredit==0? " " : dCredit.ToString("##,###.00") )
+                            </span>
+                        </td>
+                        <td colspan="1">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">&nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+    }
+
+
+}
+
+</table>

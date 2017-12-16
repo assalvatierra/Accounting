@@ -1,0 +1,75 @@
+﻿@model IEnumerable<OAS.Models.fsTrxDetail>
+
+@{
+    ViewBag.Title = "JournalList";
+
+    decimal dDebit = 0;
+    decimal dCredit = 0;
+}
+
+<h2>Journal Listing</h2>
+
+<table class="table">
+    <tr style="font:600 12px arial, verdana; color:darkblue;">
+        <th>#</th>
+        <th>Date</th>
+        <th>Account</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Debit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Credit)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    dDebit += item.Debit;
+    dCredit += item.Credit;
+
+    <tr style="font:400 12px arial, verdana; ">
+        <td>
+            @Html.DisplayFor(modelItem => item.fsTrxHdr.Id)
+        </td>
+        <td>
+            @item.fsTrxHdr.DtTrx.ToString("dd-MMM-yyyy")
+        </td>
+        <td>
+            @item.fsAccountId-@item.fsAccount.AccntTitle
+            <br />&nbsp; 
+            @if (item.fsSubAccnt.Name != "Not Applicable")
+            {
+                <span style="color:darkgray;">&nbsp; @item.fsSubAccntId-@item.fsSubAccnt.Name</span>
+            }
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td style="font-weight:600;color:darkblue;">
+            @( item.Debit == 0 ? "" : item.Debit.ToString("##,###.00;(##,###.00)") )
+        </td>
+        <td style="font-weight:600;color:darkblue;">
+            @( item.Credit == 0 ? "" : item.Credit.ToString("##,###.00;(##,###.00)") )
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
+        </td>
+    </tr>
+}
+
+
+    <tr style="background-color:lightgray;font:500 12px arial, verdana; color:blue;">
+        <th colspan="4" align="right">
+            <span>Totals</span>
+        </th>
+        <td>@dDebit.ToString("##,###.00;(##,###.00)")</td>
+        <td>@dCredit.ToString("##,###.00;(##,###.00)")</td>
+        <td></td>
+    </tr>
+    <tr><td colspan="5">&nbsp;</td></tr>
+
+</table>

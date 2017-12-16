@@ -1,0 +1,54 @@
+﻿@model IEnumerable<OAS.Models.fsAccount>
+
+@{
+    ViewBag.Title = "Index";
+    string vCat = "";
+    OAS.Models.fsEntity Entity = (OAS.Models.fsEntity)ViewBag.Entity;
+}
+
+<h2>Chart of Accounts</h2>
+@if (Entity != null)
+{
+    <br />
+            <span>
+                Company: @Entity.Name
+            </span>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+
+@foreach (var item in Model) {
+    if( vCat != item.fsAccntCategory.Name)
+    {
+        vCat = item.fsAccntCategory.Name;
+        <tr>
+            <th colspan="5">
+                <span>@vCat</span>
+            </th>
+        </tr>
+    }
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            @Html.ActionLink(item.AccntNo, "Edit", new { id = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccntTitle)
+        </td>
+        <td>
+            Increase: @Html.DisplayFor(modelItem => item.IncreaseCode)
+        </td>
+        <td>
+            <span style="font-size:small">@Html.DisplayFor(modelItem => item.Description)</span>
+        </td>
+        <td>
+            <span style="font-size:small">SysID: @Html.DisplayFor(modelItem => item.Id)</span>
+        </td>
+
+    </tr>
+}
+
+</table>
