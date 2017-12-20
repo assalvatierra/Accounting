@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OasDBStoreContainer" CdmEntityContainer="OasDBContainer">
+    <EntitySetMapping Name="fsAccounts">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsAccount)">
+        <MappingFragment StoreEntitySet="fsAccounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccntNo" ColumnName="AccntNo" />
+          <ScalarProperty Name="AccntTitle" ColumnName="AccntTitle" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IncreaseCode" ColumnName="IncreaseCode" />
+          <ScalarProperty Name="fsAccntCategoryId" ColumnName="fsAccntCategoryId" />
+          <ScalarProperty Name="fsEntityId" ColumnName="fsEntityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsAccntCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsAccntCategory)">
+        <MappingFragment StoreEntitySet="fsAccntCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsTrxHdrs">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsTrxHdr)">
+        <MappingFragment StoreEntitySet="fsTrxHdrs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DtTrx" ColumnName="DtTrx" />
+          <ScalarProperty Name="trxRemarks" ColumnName="trxRemarks" />
+          <ScalarProperty Name="dtEntry" ColumnName="dtEntry" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="dtEdit" ColumnName="dtEdit" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="fsTrxStatusId" ColumnName="fsTrxStatusId" />
+          <ScalarProperty Name="fsEntityId" ColumnName="fsEntityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsTrxDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsTrxDetail)">
+        <MappingFragment StoreEntitySet="fsTrxDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsTrxHdrId" ColumnName="fsTrxHdrId" />
+          <ScalarProperty Name="fsAccountId" ColumnName="fsAccountId" />
+          <ScalarProperty Name="fsSubAccntId" ColumnName="fsSubAccntId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Debit" ColumnName="Debit" />
+          <ScalarProperty Name="Credit" ColumnName="Credit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsSubAccnts">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsSubAccnt)">
+        <MappingFragment StoreEntitySet="fsSubAccnts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsAccountId" ColumnName="fsAccountId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="fsEntityId" ColumnName="fsEntityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsAccntSettings">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsAccntSetting)">
+        <MappingFragment StoreEntitySet="fsAccntSettings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsConfigCodeId" ColumnName="fsConfigCodeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsConfigCodes">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsConfigCode)">
+        <MappingFragment StoreEntitySet="fsConfigCodes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsTrxStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsTrxStatus)">
+        <MappingFragment StoreEntitySet="fsTrxStatus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsRptCats">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsRptCat)">
+        <MappingFragment StoreEntitySet="fsRptCats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RptCatName" ColumnName="RptCatName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsRptCatAccnts">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsRptCatAccnt)">
+        <MappingFragment StoreEntitySet="fsRptCatAccnts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsAccountId" ColumnName="fsAccountId" />
+          <ScalarProperty Name="fsRptCatId" ColumnName="fsRptCatId" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsEntities">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsEntity)">
+        <MappingFragment StoreEntitySet="fsEntities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsUser)">
+        <MappingFragment StoreEntitySet="fsUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fsEntityUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(OasDB.fsEntityUsers)">
+        <MappingFragment StoreEntitySet="fsEntityUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="fsEntityId" ColumnName="fsEntityId" />
+          <ScalarProperty Name="fsUserId" ColumnName="fsUserId" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

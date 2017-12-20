@@ -55,6 +55,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.fsTrxStatus.Status)
+            [ @Html.ActionLink("Submit", "Submit", new { id = item.Id, statusId = 2 }) | @Html.ActionLink("Post", "Submit", new { id = item.Id, statusId = 3 }) ]
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

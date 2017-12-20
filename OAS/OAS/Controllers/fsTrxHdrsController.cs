@@ -136,6 +136,15 @@ namespace OAS.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult Submit(int id, int statusId)
+        {
+            Models.fsTrxHdr hdr = db.fsTrxHdrs.Find(id);
+            hdr.fsTrxStatusId = statusId; // 2=submitted ; 3=posted
+            db.SaveChanges();
+            return RedirectToAction("index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

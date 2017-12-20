@@ -2,6 +2,13 @@
 
 @{
     ViewBag.Title = "Edit";
+
+    DateTime dtedit = new DateTime();
+    if (Model.dtEdit != null)
+    {
+        dtedit = (DateTime)Model.dtEdit;
+    }
+
 }
 
 <h2>Edit</h2>
@@ -37,32 +44,19 @@
         <div class="form-group">
             @Html.LabelFor(model => model.dtEntry, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.dtEntry, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dtEntry, "", new { @class = "text-danger" })
+                <span>@Model.EnteredBy</span> - 
+                [<span>@Model.dtEntry.ToString("dd/MM/yyyy")</span>]
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EnteredBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="dtEntry">Last Edit</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EnteredBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EnteredBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.dtEdit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dtEdit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dtEdit, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EditedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EditedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EditedBy, "", new { @class = "text-danger" })
+                @if (Model.dtEdit != null)
+                {
+                    <span> @Model.EditedBy</span>  
+                    <span> @dtedit.ToString("dd/MM/yyyy") </span>
+                }
             </div>
         </div>
 
@@ -88,4 +82,39 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+            $(document).ready(function () {
+                InitDatePicker();
+
+            })
+
+
+            function InitDatePicker() {
+                var dataLabel = "DtTrx";
+
+                var ddd1 = $('input[name=' + dataLabel + ']').val();
+
+                $('input[name=' + dataLabel + ']').daterangepicker(
+                {
+                    timePicker: false,
+                    timePickerIncrement: 30,
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    locale: {
+                        format: 'MM/DD/YYYY'
+                    }
+                },
+                function (start, end, label) {
+                    //alert(start.format('YYYY-MM-DD h:mm A'));
+
+                }
+                );
+
+
+                $('input[name=' + dataLabel + ']').val(ddd1.substr(0, ddd1.indexOf(" ")));
+
+
+            }
+    </script>
+
 }
