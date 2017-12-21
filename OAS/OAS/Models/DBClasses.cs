@@ -105,7 +105,7 @@ left outer join fsAccntCategories d on d.Id = a.fsAccntCategoryId
 where
 a.fsEntityId = '" + entId.ToString() + @"'
 and c.Id is null 
-OR ( DATEPART(mm, c.DtTrx) = '" + mon.ToString() + "' AND DATEPART(yy, c.DtTrx) = '" + year.ToString() + @"' AND c.fsTrxStatusId = '2')
+OR ( DATEPART(mm, c.DtTrx) = '" + mon.ToString() + "' AND DATEPART(yy, c.DtTrx) = '" + year.ToString() + @"' AND c.fsTrxStatusId = '3')
 
 union
 
@@ -128,7 +128,7 @@ and c.Id is null
 OR 
 	( 
 		( DATEPART(yy, c.DtTrx) < '" + year.ToString() + @"' ) OR
-		( DATEPART(mm, c.DtTrx) < '" + mon.ToString() + "' AND DATEPART(yy, c.DtTrx) = '" + year.ToString() + @"' )
+		( DATEPART(mm, c.DtTrx) < '" + mon.ToString() + "' AND DATEPART(yy, c.DtTrx) = '" + year.ToString() + @"' AND c.fsTrxStatusId = '3' )
 	)
 
 ) as x

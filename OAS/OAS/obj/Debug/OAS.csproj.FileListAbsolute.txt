@@ -79,3 +79,4 @@ D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.Twitter.
 D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.dll
 D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.pdb
+D:\Data\Real\Apps\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.csprojResolveAssemblyReference.cache
