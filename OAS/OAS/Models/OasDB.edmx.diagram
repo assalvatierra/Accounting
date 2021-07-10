@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="4ec757afa56c4726a5d96b2877140d2c" Name="Diagram1" ZoomLevel="86" >
         <EntityTypeShape EntityType="OasDB.fsAccount" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="OasDB.fsAccntCategory" Width="1.5" PointX="2.5" PointY="0.625" />
+        <EntityTypeShape EntityType="OasDB.fsAccntCategory" Width="1.5" PointX="1.625" PointY="0.625" />
         <AssociationConnector Association="OasDB.fsAccntCategoryfsAccount" />
         <EntityTypeShape EntityType="OasDB.fsTrxHdr" Width="1.5" PointX="7.5" PointY="6" />
         <EntityTypeShape EntityType="OasDB.fsTrxDetail" Width="1.5" PointX="5" PointY="6.125" />
