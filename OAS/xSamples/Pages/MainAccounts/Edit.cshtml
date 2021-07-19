@@ -1,0 +1,60 @@
+﻿@page
+@model xSamples.Pages.MainAccounts.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>fsAccount</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="fsAccount.Id" />
+            <div class="form-group">
+                <label asp-for="fsAccount.AccntNo" class="control-label"></label>
+                <input asp-for="fsAccount.AccntNo" class="form-control" />
+                <span asp-validation-for="fsAccount.AccntNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fsAccount.AccntTitle" class="control-label"></label>
+                <input asp-for="fsAccount.AccntTitle" class="form-control" />
+                <span asp-validation-for="fsAccount.AccntTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fsAccount.Description" class="control-label"></label>
+                <input asp-for="fsAccount.Description" class="form-control" />
+                <span asp-validation-for="fsAccount.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fsAccount.IncreaseCode" class="control-label"></label>
+                <input asp-for="fsAccount.IncreaseCode" class="form-control" />
+                <span asp-validation-for="fsAccount.IncreaseCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fsAccount.fsAccntCategoryId" class="control-label"></label>
+                <select asp-for="fsAccount.fsAccntCategoryId" class="form-control" asp-items="ViewBag.fsAccntCategoryId"></select>
+                <span asp-validation-for="fsAccount.fsAccntCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fsAccount.fsEntityId" class="control-label"></label>
+                <select asp-for="fsAccount.fsEntityId" class="form-control" asp-items="ViewBag.fsEntityId"></select>
+                <span asp-validation-for="fsAccount.fsEntityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

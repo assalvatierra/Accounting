@@ -1,0 +1,55 @@
+﻿@page
+@model xSamples.Pages.MainAccounts.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>fsAccount</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsAccount.AccntNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsAccount.AccntNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsAccount.AccntTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsAccount.AccntTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsAccount.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsAccount.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsAccount.IncreaseCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsAccount.IncreaseCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsAccount.fsAccntCategory)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsAccount.fsAccntCategory.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsAccount.fsEntity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsAccount.fsEntity.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.fsAccount.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
