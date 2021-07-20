@@ -163,3 +163,4 @@ C:\Abel\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.csproj.CoreCompileInputs.cache
 C:\Abel\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.csproj.CopyComplete
 C:\Abel\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.dll
 C:\Abel\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.pdb
+C:\ABEL\Github\Accounting\OAS\OAS\obj\Debug\OAS.csproj.AssemblyReference.cache

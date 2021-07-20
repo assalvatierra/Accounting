@@ -1,0 +1,55 @@
+﻿@page
+@model WebOAS.Pages.fsTrx.fsDtl.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>fsTrxDetail</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxDetail.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxDetail.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxDetail.Debit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxDetail.Debit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxDetail.Credit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxDetail.Credit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxDetail.fsAccount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxDetail.fsAccount.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxDetail.fsTrxHdr)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxDetail.fsTrxHdr.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxDetail.fsSubAccnt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxDetail.fsSubAccnt.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.fsTrxDetail.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

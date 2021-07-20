@@ -1,0 +1,47 @@
+﻿@page
+@model WebOAS.Pages.fsSubaccounts.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>fsSubAccnt</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="fsSubAccnt.fsAccountId" class="control-label"></label>
+                <select asp-for="fsSubAccnt.fsAccountId" class ="form-control" asp-items="ViewBag.fsAccountId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="fsSubAccnt.Name" class="control-label"></label>
+                <input asp-for="fsSubAccnt.Name" class="form-control" />
+                <span asp-validation-for="fsSubAccnt.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fsSubAccnt.Remarks" class="control-label"></label>
+                <input asp-for="fsSubAccnt.Remarks" class="form-control" />
+                <span asp-validation-for="fsSubAccnt.Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fsSubAccnt.fsEntityId" class="control-label"></label>
+                <select asp-for="fsSubAccnt.fsEntityId" class ="form-control" asp-items="ViewBag.fsEntityId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

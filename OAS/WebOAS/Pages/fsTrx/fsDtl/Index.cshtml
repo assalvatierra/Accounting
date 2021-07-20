@@ -1,0 +1,66 @@
+﻿@page
+@model WebOAS.Pages.fsTrx.fsDtl.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxDetail[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxDetail[0].Debit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxDetail[0].Credit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxDetail[0].fsAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxDetail[0].fsTrxHdr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxDetail[0].fsSubAccnt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.fsTrxDetail) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Debit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fsAccount.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fsTrxHdr.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fsSubAccnt.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

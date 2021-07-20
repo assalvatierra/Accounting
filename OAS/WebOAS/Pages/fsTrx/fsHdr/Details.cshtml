@@ -1,0 +1,67 @@
+﻿@page
+@model WebOAS.Pages.fsTrx.fsHdr.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>fsTrxHdr</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxHdr.DtTrx)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxHdr.DtTrx)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxHdr.trxRemarks)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxHdr.trxRemarks)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxHdr.dtEntry)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxHdr.dtEntry)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxHdr.EnteredBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxHdr.EnteredBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxHdr.dtEdit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxHdr.dtEdit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxHdr.EditedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxHdr.EditedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxHdr.fsTrxStatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxHdr.fsTrxStatus.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.fsTrxHdr.fsEntity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.fsTrxHdr.fsEntity.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.fsTrxHdr.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
