@@ -159,7 +159,6 @@ C:\Abel\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Abel\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.Google.xml
 C:\Abel\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Abel\GitHub\Accounting\OAS\OAS\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Abel\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.csproj.AssemblyReference.cache
 C:\Abel\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.csproj.CoreCompileInputs.cache
 C:\Abel\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.csproj.CopyComplete
 C:\Abel\GitHub\Accounting\OAS\OAS\obj\Debug\OAS.dll

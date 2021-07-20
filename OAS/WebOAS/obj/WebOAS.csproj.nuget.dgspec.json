@@ -1,20 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Abel\\GitHub\\Accounting\\OAS\\WebOAS\\WebOAS.csproj": {}
+    "C:\\ABEL\\Github\\Accounting\\OAS\\WebOAS\\WebOAS.csproj": {}
   },
   "projects": {
-    "C:\\Abel\\GitHub\\Accounting\\OAS\\WebOAS\\WebOAS.csproj": {
+    "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj",
+        "projectName": "OAS",
+        "projectPath": "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj"
+      },
+      "frameworks": {
+        "net452": {}
+      }
+    },
+    "C:\\ABEL\\Github\\Accounting\\OAS\\WebOAS\\WebOAS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Abel\\GitHub\\Accounting\\OAS\\WebOAS\\WebOAS.csproj",
+        "projectUniqueName": "C:\\ABEL\\Github\\Accounting\\OAS\\WebOAS\\WebOAS.csproj",
         "projectName": "WebOAS",
-        "projectPath": "C:\\Abel\\GitHub\\Accounting\\OAS\\WebOAS\\WebOAS.csproj",
-        "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Abel\\GitHub\\Accounting\\OAS\\WebOAS\\obj\\",
+        "projectPath": "C:\\ABEL\\Github\\Accounting\\OAS\\WebOAS\\WebOAS.csproj",
+        "packagesPath": "C:\\Users\\HP-Abel\\.nuget\\packages\\",
+        "outputPath": "C:\\ABEL\\Github\\Accounting\\OAS\\WebOAS\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP-Abel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,7 +40,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj": {
+                "projectPath": "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -54,11 +71,17 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.7, )"
+              "version": "[5.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.7, )"
+              "version": "[5.0.8, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [
@@ -71,20 +94,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

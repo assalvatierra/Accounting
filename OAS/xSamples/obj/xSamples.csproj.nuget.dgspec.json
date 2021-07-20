@@ -1,30 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Abel\\GitHub\\Accounting\\OAS\\xSamples\\xSamples.csproj": {}
+    "C:\\ABEL\\Github\\Accounting\\OAS\\xSamples\\xSamples.csproj": {}
   },
   "projects": {
-    "C:\\Abel\\GitHub\\Accounting\\OAS\\OAS\\OAS.csproj": {
+    "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Abel\\GitHub\\Accounting\\OAS\\OAS\\OAS.csproj",
+        "projectUniqueName": "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj",
         "projectName": "OAS",
-        "projectPath": "C:\\Abel\\GitHub\\Accounting\\OAS\\OAS\\OAS.csproj"
+        "projectPath": "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj"
       },
       "frameworks": {
         "net452": {}
       }
     },
-    "C:\\Abel\\GitHub\\Accounting\\OAS\\xSamples\\xSamples.csproj": {
+    "C:\\ABEL\\Github\\Accounting\\OAS\\xSamples\\xSamples.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Abel\\GitHub\\Accounting\\OAS\\xSamples\\xSamples.csproj",
+        "projectUniqueName": "C:\\ABEL\\Github\\Accounting\\OAS\\xSamples\\xSamples.csproj",
         "projectName": "xSamples",
-        "projectPath": "C:\\Abel\\GitHub\\Accounting\\OAS\\xSamples\\xSamples.csproj",
-        "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Abel\\GitHub\\Accounting\\OAS\\xSamples\\obj\\",
+        "projectPath": "C:\\ABEL\\Github\\Accounting\\OAS\\xSamples\\xSamples.csproj",
+        "packagesPath": "C:\\Users\\HP-Abel\\.nuget\\packages\\",
+        "outputPath": "C:\\ABEL\\Github\\Accounting\\OAS\\xSamples\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP-Abel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,8 +41,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Abel\\GitHub\\Accounting\\OAS\\OAS\\OAS.csproj": {
-                "projectPath": "C:\\Abel\\GitHub\\Accounting\\OAS\\OAS\\OAS.csproj"
+              "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj": {
+                "projectPath": "C:\\ABEL\\Github\\Accounting\\OAS\\OAS\\OAS.csproj"
               }
             }
           }
@@ -79,20 +82,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
