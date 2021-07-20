@@ -29,7 +29,7 @@ namespace WebOAS.Pages.fsAccounts
                 return NotFound();
             }
 
-            fsAccount = await _context.fsAccount
+            fsAccount = await _context.fsAccounts
                 .Include(f => f.fsAccntCategory)
                 .Include(f => f.fsEntity).FirstOrDefaultAsync(m => m.Id == id);
 
@@ -47,11 +47,11 @@ namespace WebOAS.Pages.fsAccounts
                 return NotFound();
             }
 
-            fsAccount = await _context.fsAccount.FindAsync(id);
+            fsAccount = await _context.fsAccounts.FindAsync(id);
 
             if (fsAccount != null)
             {
-                _context.fsAccount.Remove(fsAccount);
+                _context.fsAccounts.Remove(fsAccount);
                 await _context.SaveChangesAsync();
             }
 

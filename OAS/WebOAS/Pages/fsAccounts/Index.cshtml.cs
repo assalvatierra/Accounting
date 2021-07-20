@@ -23,7 +23,7 @@ namespace WebOAS.Pages.fsAccounts
 
         public async Task OnGetAsync()
         {
-            fsAccount = await _context.fsAccount
+            fsAccount = await _context.fsAccounts
                 .Include(f => f.fsAccntCategory)
                 .Include(f => f.fsEntity).ToListAsync();
         }

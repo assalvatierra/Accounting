@@ -37,7 +37,7 @@ namespace WebOAS.Pages.fsAccounts
                 return Page();
             }
 
-            _context.fsAccount.Add(fsAccount);
+            _context.fsAccounts.Add(fsAccount);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

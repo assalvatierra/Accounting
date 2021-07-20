@@ -30,7 +30,7 @@ namespace WebOAS.Pages.fsAccounts
                 return NotFound();
             }
 
-            fsAccount = await _context.fsAccount
+            fsAccount = await _context.fsAccounts
                 .Include(f => f.fsAccntCategory)
                 .Include(f => f.fsEntity).FirstOrDefaultAsync(m => m.Id == id);
 
@@ -75,7 +75,7 @@ namespace WebOAS.Pages.fsAccounts
 
         private bool fsAccountExists(int id)
         {
-            return _context.fsAccount.Any(e => e.Id == id);
+            return _context.fsAccounts.Any(e => e.Id == id);
         }
     }
 }
