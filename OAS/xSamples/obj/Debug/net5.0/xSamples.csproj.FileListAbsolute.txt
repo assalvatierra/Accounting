@@ -9,7 +9,6 @@ C:\Abel\GitHub\Accounting\OAS\xSamples\bin\Debug\net5.0\ref\xSamples.dll
 C:\Abel\GitHub\Accounting\OAS\xSamples\bin\Debug\net5.0\xSamples.pdb
 C:\Abel\GitHub\Accounting\OAS\xSamples\bin\Debug\net5.0\xSamples.Views.dll
 C:\Abel\GitHub\Accounting\OAS\xSamples\bin\Debug\net5.0\xSamples.Views.pdb
-C:\Abel\GitHub\Accounting\OAS\xSamples\obj\Debug\net5.0\xSamples.csproj.AssemblyReference.cache
 C:\Abel\GitHub\Accounting\OAS\xSamples\obj\Debug\net5.0\xSamples.GeneratedMSBuildEditorConfig.editorconfig
 C:\Abel\GitHub\Accounting\OAS\xSamples\obj\Debug\net5.0\xSamples.AssemblyInfoInputs.cache
 C:\Abel\GitHub\Accounting\OAS\xSamples\obj\Debug\net5.0\xSamples.AssemblyInfo.cs
@@ -195,3 +194,4 @@ C:\Abel\GitHub\Accounting\OAS\xSamples\obj\Debug\net5.0\Razor\Pages\MainAccounts
 C:\Abel\GitHub\Accounting\OAS\xSamples\obj\Debug\net5.0\Razor\Pages\MainAccounts\Details.cshtml.g.cs
 C:\Abel\GitHub\Accounting\OAS\xSamples\obj\Debug\net5.0\Razor\Pages\MainAccounts\Edit.cshtml.g.cs
 C:\Abel\GitHub\Accounting\OAS\xSamples\obj\Debug\net5.0\Razor\Pages\MainAccounts\Index.cshtml.g.cs
+C:\Abel\GitHub\Accounting\OAS\xSamples\obj\Debug\net5.0\xSamples.csprojAssemblyReference.cache

@@ -256,7 +256,6 @@ C:\Abel\GitHub\Accounting\OAS\WebOAS\bin\Debug\net5.0\System.Web.Razor.xml
 C:\Abel\GitHub\Accounting\OAS\WebOAS\bin\Debug\net5.0\System.Web.WebPages.Razor.xml
 C:\Abel\GitHub\Accounting\OAS\WebOAS\bin\Debug\net5.0\System.Web.WebPages.xml
 C:\Abel\GitHub\Accounting\OAS\WebOAS\bin\Debug\net5.0\System.Web.WebPages.Deployment.xml
-C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\WebOAS.csproj.AssemblyReference.cache
 C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\WebOAS.GeneratedMSBuildEditorConfig.editorconfig
 C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\WebOAS.AssemblyInfoInputs.cache
 C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\WebOAS.AssemblyInfo.cs
@@ -308,3 +307,5 @@ C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\WebOAS.dll
 C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\ref\WebOAS.dll
 C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\WebOAS.pdb
 C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\WebOAS.genruntimeconfig.cache
+C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\WebOAS.csprojAssemblyReference.cache
+C:\Abel\GitHub\Accounting\OAS\WebOAS\obj\Debug\net5.0\Razor\Pages\fsTrx\Index.cshtml.g.cs

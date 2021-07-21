@@ -1,0 +1,81 @@
+﻿@page
+@model WebOAS.Pages.fsTrx.IndexModel
+@{
+}
+
+<h1>Journal List</h1>
+
+<p>
+    <a asp-page="/fsTrx/fsHdr/Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxHdr[0].DtTrx)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxHdr[0].trxRemarks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxHdr[0].dtEntry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxHdr[0].EnteredBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxHdr[0].dtEdit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxHdr[0].EditedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxHdr[0].fsTrxStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fsTrxHdr[0].fsEntity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.fsTrxHdr)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DtTrx)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.trxRemarks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dtEntry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnteredBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dtEdit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EditedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fsTrxStatus.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fsEntity.Id)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
